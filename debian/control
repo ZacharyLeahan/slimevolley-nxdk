@@ -1,0 +1,31 @@
+Source: slimevolley
+Section: games
+Priority: extra
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Uploaders: Vincent Duvert (VinDuv) <vincent.duvert@free.fr>
+Build-Depends: debhelper (>= 7.0.0), cmake (>= 2.0.5), libsdl-image1.2-dev (>= 1.2.5), libsdl-ttf2.0-dev (>= 2.0.6), libsdl-net1.2-dev (>= 1.2.5), libsdl1.2-dev (>= 1.2.7) 
+Standards-Version: 3.8.4
+Homepage: http://slime.tuxfamily.org/
+Vcs-Svn: svn://svn.debian.org/svn/pkg-games/packages/trunk/slimevolley/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-games/packages/trunk/slimevolley/?op=log
+
+Package: slimevolley
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, slimevolley-data (= ${source:Version})
+Description: Unrealistic 2D volleyball simulation
+ Slime Volley is a 2D arcade-oriented volleyball simulation, in the spirit of
+ some Java games of the same name.
+ Two teams, 1-3 players each, try to be the first to get 10 points. This happens
+ when the one ball touches the floor on the other side of the net.
+ There can be 1 to 8 balls in game.
+ Each player use 4 keys, 2 direction keys, one for jump and one for changing its
+ skin.
+
+Package: slimevolley-data
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: slimevolley
+Description: Unrealistic 2D volleyball simulation - Data files
+ Slime Volley is a 2D arcade-oriented volleyball simulation, in the spirit of
+ some Java games of the same name.
+ This package contains the data files needed to run Slime Volley.
