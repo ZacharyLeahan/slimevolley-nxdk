@@ -263,8 +263,10 @@ Public License can be found in `/usr/share/common-licenses/GPL'.
    	s_filet.wav, s_jg_m.wav, s_mur.wav, s_slime.wav.
    
    The following file is Copyright (c) 2003 Dustin Norlander and distributed
-   under the terms of the GNU GPLv2:
+   under the terms of the GNU GPLv2 (or later):
    	police.ttf
+   The original name of the font is "Domestic Manners", the site of the author is down,
+   you can get a copy of the font here: http://www.dafont.com/domestic-manners.font
    
    On Debian systems, the complete text of the GNU General Public License
    version 2 can be found in `/usr/share/common-licenses/GPL-2'.

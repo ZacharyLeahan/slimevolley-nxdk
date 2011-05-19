@@ -17,7 +17,7 @@ DOC_DIR = $(CURDIR)/debian/slimevolley-data/usr/share/doc/slimevolley-data
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	cmake -DCMAKE_INSTALL_PREFIX=/usr -DBIN_DIR=games -DATA_DIR=/usr/share/games/slimevolley -DDATA_INSTALL_DIR=../../../debian/slimevolley-data/usr/share/games/slimevolley .
+	cmake -DCMAKE_INSTALL_PREFIX=/usr -DBIN_DIR=games -DATA_DIR=/usr/share/games/slimevolley -DDATA_INSTALL_DIR=../../..//debian/slimevolley-data/usr/share/games/slimevolley .
 
 	touch configure-stamp
 
@@ -56,6 +56,7 @@ install: build
 	dh_installdirs
 
 	$(MAKE) DESTDIR=$(CURDIR)/debian/slimevolley install
+	$(RM) $(CURDIR)/debian/slimevolley/usr/share/games/slimevolley/themes/default/police.ttf
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -80,6 +81,17 @@ binary-arch: build install
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
+
+get-orig-source:
+	mkdir get-orig-source-tmp
+	uscan --download-current-version --destdir=get-orig-source-tmp && \
+		cd get-orig-source-tmp && \
+		tar xzf slimevolley_2.4.2.orig.tar.gz && \
+		cp slimevolley-2.4.2/data/themes/mushrooms/police.ttf \
+			slimevolley-2.4.2/data/themes/default/police.ttf && \
+		tar zcf ../../slimevolley_2.4.2+dfsg.orig.tar.gz slimevolley-2.4.2 && \
+		cd ..
+	$(RM) -rf get-orig-source-tmp
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install configure

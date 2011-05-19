@@ -1,3 +1,19 @@
+slimevolley (2.4.2+dfsg-1) unstable; urgency=low
+
+  * Team upload.
+  * Link to libm to prevent FTBFS with --no-add-needed.
+    Closes: #615775
+  * Slightly improve descriptions.
+  * Add more copyright information about the font for the mushrooms theme.
+  * Add a get-orig-source target to create DFSG-free tarball.
+  * Use http://download.tuxfamily.org/slime/next/ in the watchfile.
+  * In the DFSG-free tarball default/police.ttf and mushrooms/police.ttf
+    are the same, remove one and symlink accordingly in the package.
+  * Mangle version in the watchfile.
+  * Standards-Version: 3.9.2
+
+ -- Evgeni Golov <evgeni@debian.org>  Thu, 19 May 2011 18:34:22 +0200
+
 slimevolley (2.4.2-1) unstable; urgency=low
 
   * Initial release (Closes: #539640)
