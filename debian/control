@@ -2,16 +2,26 @@ Source: slimevolley
 Section: games
 Priority: extra
 Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
-Uploaders: Vincent Duvert (VinDuv) <vincent.duvert@free.fr>
-Build-Depends: debhelper (>= 7.0.0), cmake (>= 2.0.5), libsdl-image1.2-dev (>= 1.2.5), libsdl-ttf2.0-dev (>= 2.0.6), libsdl-net1.2-dev (>= 1.2.5), libsdl1.2-dev (>= 1.2.7) 
-Standards-Version: 3.9.2
+Uploaders:
+ Vincent Duvert (VinDuv) <vincent.duvert@free.fr>
+Build-Depends:
+ cmake,
+ debhelper (>= 9),
+ libsdl-image1.2-dev,
+ libsdl-net1.2-dev,
+ libsdl-ttf2.0-dev,
+ libsdl1.2-dev
+Standards-Version: 3.9.8
 Homepage: http://slime.tuxfamily.org/
-Vcs-Svn: svn://svn.debian.org/svn/pkg-games/packages/trunk/slimevolley/
-Vcs-Browser: http://svn.debian.org/wsvn/pkg-games/packages/trunk/slimevolley/?op=log
+Vcs-Svn: svn://anonscm.debian.org/pkg-games/packages/trunk/slimevolley/
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-games/packages/trunk/slimevolley/
 
 Package: slimevolley
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, slimevolley-data (= ${source:Version})
+Depends:
+ slimevolley-data (= ${source:Version}),
+ ${misc:Depends},
+ ${shlibs:Depends}
 Description: unrealistic 2D volleyball simulation
  Slime Volley is a 2D arcade-oriented volleyball simulation, in the spirit of
  some Java games of the same name.
@@ -23,8 +33,10 @@ Description: unrealistic 2D volleyball simulation
 
 Package: slimevolley-data
 Architecture: all
-Depends: ${misc:Depends}
-Recommends: slimevolley
+Depends:
+ ${misc:Depends}
+Suggests:
+ slimevolley
 Description: unrealistic 2D volleyball simulation - data files
  Slime Volley is a 2D arcade-oriented volleyball simulation, in the spirit of
  some Java games of the same name.

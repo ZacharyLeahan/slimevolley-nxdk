@@ -1,3 +1,20 @@
+slimevolley (2.4.2+dfsg-2) unstable; urgency=medium
+
+  * Team upload.
+  * wrap-and-sort -sa.
+  * Use compat level 9 and require debhelper >= 9.
+  * d/control: Remove versioned constraints.
+  * Declare compliance with Debian Policy 3.9.8.
+  * Use canonical VCS-URI.
+  * slimevolley.desktop: Add keywords and a comment in German.
+  * debian/watch: Use version=4.
+  * slimevolley-data: Change Recommends: slimevolley to Suggests.
+  * Simplify debian/rules by using dh sequencer. (Closes: #822023)
+  * Use install files and remove dirs file.
+  * slimevolley.desktop: Use 64x64 pixel icon.
+
+ -- Markus Koschany <apo@debian.org>  Sat, 04 Jun 2016 06:46:42 +0200
+
 slimevolley (2.4.2+dfsg-1) unstable; urgency=low
 
   * Team upload.
