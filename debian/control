@@ -11,7 +11,7 @@ Build-Depends:
  libsdl-net1.2-dev,
  libsdl-ttf2.0-dev,
  libsdl1.2-dev
-Standards-Version: 3.9.8
+Standards-Version: 4.5.0
 Homepage: http://slime.tuxfamily.org/
 Vcs-Svn: svn://anonscm.debian.org/pkg-games/packages/trunk/slimevolley/
 Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-games/packages/trunk/slimevolley/
