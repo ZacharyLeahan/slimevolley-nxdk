@@ -1,4 +1,4 @@
 # See uscan(1) for details about this file.
 version=4
 opts=dversionmangle=s/\+dfsg// \
- http://download.tuxfamily.org/slime/next/slimevolley_([\d.]+)\.orig\.tar\.gz
+ https://download.tuxfamily.org/slime/next/slimevolley_([\d.]+)\.orig\.tar\.gz
