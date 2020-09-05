@@ -6,7 +6,7 @@ Uploaders:
  Vincent Duvert (VinDuv) <vincent.duvert@free.fr>
 Build-Depends:
  cmake,
- debhelper (>= 9),
+ debhelper-compat (= 13),
  libsdl-image1.2-dev,
  libsdl-net1.2-dev,
  libsdl-ttf2.0-dev,
