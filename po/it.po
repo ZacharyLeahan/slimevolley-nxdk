@@ -1,0 +1,452 @@
+# Slime Volley Italian translation
+# Copyright (C) Flavio Pastore
+# This file is distributed under the same license as the Slime Volley package.
+# Flavio Pastore <vincent.duvert@free.fr>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.2\n"
+"Report-Msgid-Bugs-To: slime.tuxfamily.org\n"
+"POT-Creation-Date: 2008-04-03 21:54+0200\n"
+"PO-Revision-Date: 2009-08-07 15:53+0100\n"
+"Last-Translator: Flavio Pastore <ironbishop@fsfe.org>\n"
+"Language-Team: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: src/clavier.c:57
+msgid "Up"
+msgstr "Su"
+
+#: src/clavier.c:57
+msgid "Down"
+msgstr "Giù"
+
+#: src/clavier.c:57
+msgid "Left"
+msgstr "Sinistra"
+
+#: src/clavier.c:57
+msgid "Right"
+msgstr "Destra"
+
+#: src/clavier.c:127
+msgid "Keys set A:"
+msgstr "Tastiera A:"
+
+#: src/clavier.c:128
+msgid "Keys set B:"
+msgstr "Tastiera B:"
+
+#: src/clavier.c:129
+msgid "Keys set C:"
+msgstr "Tastiera C:"
+
+#: src/clavier.c:130
+msgid "Keys set D:"
+msgstr "Tastiera D:"
+
+#: src/clavier.c:142
+#, c-format
+msgid "%s: Press any key..."
+msgstr "%s: Premi un tasto..."
+
+#: src/clavier.c:144
+#, c-format
+msgid "%s: Unassigned"
+msgstr "%s: Non assegnato"
+
+#: src/clavier.c:146
+#, c-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: src/jeu.c:143
+#: src/jeu.c:673
+#: src/jeu.c:968
+#, c-format
+msgid "Score: %d - %d"
+msgstr "Punteggio: %d - %d"
+
+#: src/jeu.c:619
+msgid "Paused"
+msgstr "Pausa"
+
+#: src/jeu.c:956
+msgid "Server address:"
+msgstr "Indirizzo del server:"
+
+#: src/menu_jeu.c:118
+msgid "Disabled"
+msgstr "Disattivato"
+
+#: src/menu_jeu.c:118
+#, c-format
+msgid "Local, key set %c"
+msgstr "Locale, tastiera %c"
+
+#: src/menu_jeu.c:118
+msgid "AI"
+msgstr "IA"
+
+#: src/menu_jeu.c:118
+msgid "Remote"
+msgstr "Remoto"
+
+#: src/menu_jeu.c:146
+msgid "Start game"
+msgstr "Inizia la partita"
+
+#: src/menu_jeu.c:161
+msgid "Right team:"
+msgstr "Squadra a destra:"
+
+#: src/menu_jeu.c:168
+msgid "Left team:"
+msgstr "Squadra a sinistra:"
+
+#: src/menu_jeu.c:181
+#: src/menu_jeu.c:183
+#, c-format
+msgid "#%d: %s"
+msgstr "n° %d : %s"
+
+#: src/menu_jeu.c:207
+msgid "Return"
+msgstr "Indietro"
+
+#: src/menu_jeu.c:218
+msgid "Start the game with the specified parameters"
+msgstr "Inizia la partita con i parametri specificati"
+
+#: src/menu_jeu.c:222
+msgid ""
+"This player will be controlled from the keyboard.\n"
+"You can change the key configurations in the Options menu."
+msgstr ""
+"Questo giocatore sarà controllato tramite la tastiera.\n"
+"Puoi cambiare la configurazione dei tasti tramite il menù Opzioni."
+
+#: src/menu_jeu.c:226
+msgid "This player will be controlled by the computer."
+msgstr "Questo giocatore sarà controllato dal computer."
+
+#: src/menu_jeu.c:229
+msgid ""
+"This player will be controlled by a remote computer on local network.\n"
+"You will need to allow connections to your computer on port 2222."
+msgstr ""
+"Questo giocatore sarà controllato da un computer remoto sulla rete locale.\n"
+"Assicurati di permettere connessioni al tuo computer sulla porta 2222."
+
+#: src/menu_options.c:37
+msgid "Fullscreen: Enabled"
+msgstr "Schermo intero: Attivato"
+
+#: src/menu_options.c:39
+msgid "Fullscreen: Disabled"
+msgstr "Schermo intero: Disattivato"
+
+#: src/menu_options.c:52
+msgid "[Audio unavailable]"
+msgstr "[Audio non disponibile]"
+
+#: src/menu_options.c:54
+msgid "Sounds: Disabled"
+msgstr "Suoni: Disattivato"
+
+#: src/menu_options.c:56
+msgid "Sounds: Enabled"
+msgstr "Suoni: Attivati"
+
+#: src/menu_options.c:66
+msgid "Score display: Enabled"
+msgstr "Mostra punteggio: Attivato"
+
+#: src/menu_options.c:68
+msgid "Score display: Disabled"
+msgstr "Mostra punteggio: Disattivato"
+
+#: src/menu_options.c:78
+msgid "FPS counter: Enabled"
+msgstr "Mostra FPS: Attivato"
+
+#: src/menu_options.c:80
+msgid "FPS counter: Disabled"
+msgstr "Mostra FPS: Disattivato"
+
+#: src/menu_options.c:89
+#, c-format
+msgid "Theme: %s"
+msgstr "Tema: %s"
+
+#: src/menu_options.c:99
+msgid "If enabled, the current score will be shown permanently."
+msgstr "Se attivato, il punteggio della partita sarà sempre visibile sullo schermo."
+
+#: src/menu_options.c:104
+msgid "Set keys"
+msgstr "Imposta i tasti"
+
+#: src/menu_options.c:104
+msgid "Define game key controls."
+msgstr "Definisci i tasti di gioco."
+
+#: src/menu_options.c:114
+msgid "The theme change the menu and game look."
+msgstr "Il tema cambia l'aspetto del menù e del gioco."
+
+#: src/menu_princ.c:33
+msgid "normal"
+msgstr "normale"
+
+#: src/menu_princ.c:33
+msgid "turbo"
+msgstr "turbo"
+
+#: src/menu_princ.c:33
+msgid "sprint"
+msgstr "veloce"
+
+#: src/menu_princ.c:33
+msgid "fury"
+msgstr "furia"
+
+#: src/menu_princ.c:35
+#, c-format
+msgid "Speed: %s"
+msgstr "Velocità: %s"
+
+#: src/menu_princ.c:50
+msgid "The default speed."
+msgstr "La velocità di base."
+
+#: src/menu_princ.c:53
+msgid ""
+"In the turbo mode, everything goes twice as highter\n"
+" and twice as faster."
+msgstr "Nella modalità turbo, velocità e altezza raddoppiano."
+
+#: src/menu_princ.c:56
+msgid ""
+"In the sprint mode, everything goes faster and highter\n"
+" for each bounce."
+msgstr ""
+"Nella modalità veloce, velocità e altezza aumentano\n"
+"ad ogni ribalzo."
+
+#: src/menu_princ.c:59
+msgid "In the fury mode, the speed is increased for each bounce."
+msgstr "Nella modalità furia, la velocità aumenta ad ogni rimbalzo."
+
+#: src/menu_princ.c:69
+#, c-format
+msgid "Balls: %d"
+msgstr "Palloni: %d"
+
+#: src/menu_princ.c:84
+msgid "Play..."
+msgstr "Gioca..."
+
+#: src/menu_princ.c:84
+msgid "Starts a new game."
+msgstr "Inizia una nuova partita."
+
+#: src/menu_princ.c:87
+msgid "Connect to server..."
+msgstr "Connetti ad un server..."
+
+#: src/menu_princ.c:87
+msgid "Connect to a distant server."
+msgstr "Si collega ad una partita in un server remoto."
+
+#: src/menu_princ.c:92
+msgid "Choose the number of balls."
+msgstr "Definisce il numero di palloni."
+
+#: src/menu_princ.c:93
+msgid "Options..."
+msgstr "Opzioni..."
+
+#: src/menu_princ.c:93
+msgid "Configure sound, keys, screen and theme."
+msgstr "Configura i suoni, i comandi, lo schermo e i temi."
+
+#: src/menu_princ.c:94
+msgid "Credits"
+msgstr "Crediti"
+
+#: src/menu_princ.c:94
+msgid "Who made this game?"
+msgstr "Chi ha fatto questo gioco?"
+
+#: src/menu_princ.c:97
+msgid "Quit"
+msgstr "Esci"
+
+#: src/reseau.c:86
+#: src/reseau.c:147
+#, c-format
+msgid "Connected: %d/%d"
+msgstr "Connessi: %d/%d"
+
+#: src/reseau.c:87
+msgid "Waiting for remote players..."
+msgstr "In attesa di giocatori..."
+
+#: src/reseau.c:87
+#: src/reseau.c:278
+#: src/reseau.c:302
+msgid "Press Escape to cancel."
+msgstr "Premi ESC per annullare."
+
+#: src/reseau.c:148
+msgid "Get ready..."
+msgstr "Pronti..."
+
+#: src/reseau.c:262
+msgid "Name resolving error."
+msgstr "Errore di risoluzione del nome."
+
+#: src/reseau.c:262
+msgid "Please check the hostname you provided."
+msgstr "Verifica il nome host che hai scritto."
+
+#: src/reseau.c:278
+msgid "Connecting to server..."
+msgstr "Connessione al server..."
+
+#: src/reseau.c:297
+#, c-format
+msgid "You will be the left player #%d."
+msgstr "Sei il giocatore di sinistra n° %d."
+
+#: src/reseau.c:299
+#, c-format
+msgid "You will be the right player #%d."
+msgstr "Sei il giocatore di destra n° %d."
+
+#: src/reseau.c:302
+msgid "Connected. Waiting for server..."
+msgstr "Connesso. In attesa del server..."
+
+#: src/themes_std.c:89
+#, c-format
+msgid "Unable to access the data directory.\n"
+msgstr "Impossibile aprire alla cartella dei dati.\n"
+
+#: src/themes_std.c:114
+#: src/themes_std.c:131
+#, c-format
+msgid "Error loading slime skins: %s\n"
+msgstr "Errore nel caricamento delle immagini degli slime: %s\n"
+
+#: src/themes_std.c:145
+#, c-format
+msgid "Unable to access themes directory %s: "
+msgstr "Impossibile aprire la cartella dei temi %s"
+
+#: src/themes_std.c:163
+#, c-format
+msgid "Error loading image from theme %s: %s\n"
+msgstr "Errore nel caricamento dell'immagine del tema %s: %s\n"
+
+#: src/themes_std.c:178
+#, c-format
+msgid "Error loading font from theme %s: %s\n"
+msgstr "Errore nel caricamento del carattere del tema %s: %s\n"
+
+#: src/themes_std.c:200
+#, c-format
+msgid "Error loading sound from theme %s: %s\n"
+msgstr "Errore nel caricamento del suono del tema %s: %s\n"
+
+#: src/themes_std.c:237
+#, c-format
+msgid "Unable to find any themes in the themes directory !\n"
+msgstr "Impossibile trovare un tema nella cartella dei temi!\n"
+
+#: src/themes_std.c:283
+#, c-format
+msgid "The theme %s is corrupt.\n"
+msgstr "Il tema %s è danneggiato.\n"
+
+msgid "up"
+msgstr "su"
+
+msgid "tab"
+msgstr "tab"
+
+msgid "caps lock"
+msgstr "bloc maiusc"
+
+msgid "delete"
+msgstr "canc"
+
+msgid "down"
+msgstr "giù"
+
+msgid "left"
+msgstr "sinistra"
+
+msgid "left alt"
+msgstr "ALT sinistro"
+
+msgid "left ctrl"
+msgstr "CTRL sinistro"
+
+msgid "left shift"
+msgstr "MAIUSC sinistro"
+
+msgid "left super"
+msgstr "SUPER sinistro"
+
+msgid "left meta"
+msgstr "META sinistro"
+
+msgid "return"
+msgstr "indietro"
+
+msgid "right"
+msgstr "destra"
+
+msgid "right alt"
+msgstr "ALT destro"
+
+msgid "right ctrl"
+msgstr "CTRL destro"
+
+msgid "right shift"
+msgstr "MAIUSC destro"
+
+msgid "right super"
+msgstr "SUPER destro"
+
+msgid "right meta"
+msgstr "META destro"
+
+msgid "space"
+msgstr "spazio"
+
+msgid "home"
+msgstr "inizio"
+
+msgid "end"
+msgstr "fine"
+
+msgid "page up"
+msgstr "pagina su"
+
+msgid "page down"
+msgstr "pagina giù"
+
+msgid "numlock"
+msgstr "bloc num"
+
+msgid "equals"
+msgstr "uguale"
+
+msgid "enter"
+msgstr "invio"

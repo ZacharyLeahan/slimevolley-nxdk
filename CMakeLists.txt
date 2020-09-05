@@ -1,0 +1,145 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+IF(COMMAND cmake_policy)
+	CMAKE_POLICY(SET CMP0003 NEW)
+ENDIF(COMMAND cmake_policy)
+
+PROJECT(slimevolley)
+FIND_PACKAGE(SDL REQUIRED)
+FIND_PACKAGE(SDL_ttf REQUIRED)
+FIND_PACKAGE(SDL_image REQUIRED)
+FIND_PACKAGE(SDL_net)
+
+IF(NOT SDL_FOUND)
+	MESSAGE(FATAL_ERROR "SDL not found!")
+ENDIF(NOT SDL_FOUND)
+
+IF(NOT SDLTTF_FOUND)
+	MESSAGE(FATAL_ERROR "SDL_ttf not found!")
+ENDIF(NOT SDLTTF_FOUND)
+
+IF(NOT SDLIMAGE_FOUND)
+	MESSAGE(FATAL_ERROR "SDL_image not found!")
+ENDIF(NOT SDLIMAGE_FOUND)
+
+IF(SDLNET_FOUND)
+	IF(NO_NET)	
+		MESSAGE(STATUS "Network support disabled (-DNO_NET=1 option used).")
+	ELSE(NO_NET)
+		MESSAGE(STATUS "Network support enabled, use -DNO_NET=1 option to disable.")
+		SET(NET_SUPPORT 1)
+	ENDIF(NO_NET)
+ELSE(SDLNET_FOUND)
+	 MESSAGE(STATUS "SDL_net not found, network support disabled.")
+ENDIF(SDLNET_FOUND)
+
+INCLUDE_DIRECTORIES(
+	${SDL_INCLUDE_DIR}
+	${SDLTTF_INCLUDE_DIR}
+	${SDLIMAGE_INCLUDE_DIR}
+)
+
+LINK_LIBRARIES(
+	${SDL_LIBRARY}
+	${SDLTTF_LIBRARY}
+	${SDLIMAGE_LIBRARY}
+)
+
+INCLUDE(FindGettext.cmake)
+
+IF(GETTEXT_RUNTIME_FOUND)
+	SET(I10N TRUE)
+	SET(I10N_DIR ${CMAKE_INSTALL_PREFIX}/share/locale)
+	INCLUDE_DIRECTORIES(${GETTEXT_INCLUDE_DIR})
+	LINK_LIBRARIES(${GETTEXT_LIBRARIES})
+ELSE(GETTEXT_RUNTIME_FOUND)
+	SET(I10N FALSE)
+ENDIF(GETTEXT_RUNTIME_FOUND)
+
+IF(NET_SUPPORT)
+	INCLUDE_DIRECTORIES(${SDLNET_INCLUDE_DIR})
+	LINK_LIBRARIES(${SDLNET_LIBRARY})
+ENDIF(NET_SUPPORT)
+
+SET(
+	SOURCES
+	src/audio.c
+	src/clavier.c
+	src/credits.c
+	src/IA.c
+	src/jeu.c
+	src/menu_jeu.c
+	src/menu_options.c
+	src/menu_princ.c
+	src/menu.c
+	src/objet.c
+	src/reseau_inter.c
+	src/reseau.c
+	src/slime.c
+	src/themes_general.c
+	src/echelle.c
+)
+
+IF(APPLE)
+	SET(
+		SOURCES
+		${SOURCES}
+		macosx/SDLMain.m
+	)
+ENDIF(APPLE)
+
+IF(SV_PORTABLE)
+	ADD_EXECUTABLE(
+		packer
+		src/packer.c
+	)
+	MESSAGE(STATUS "A portable build will be created.")
+	SET(
+		SOURCES
+		${SOURCES}
+		src/themes_portable.c
+	)
+ELSE(SV_PORTABLE)
+	IF(NOT DATA_DIR)
+		IF(WINDOWS)
+			SET(DATA_DIR "data")
+		ELSE(WINDOWS)
+			SET(DATA_DIR 
+"${CMAKE_INSTALL_PREFIX}/share/games/slimevolley")
+		ENDIF(WINDOWS)
+	ENDIF(NOT DATA_DIR)
+	MESSAGE(STATUS "Slime data will be installed in ${DATA_DIR}.")
+	SET(
+		SOURCES
+		${SOURCES}
+		src/themes_std.c
+	)
+ENDIF(SV_PORTABLE)
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
+INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR})
+
+ADD_EXECUTABLE(
+	slimevolley
+	${SOURCES}
+)
+
+ADD_SUBDIRECTORY(po)
+ADD_SUBDIRECTORY(data)
+
+IF(SV_PORTABLE)
+	ADD_CUSTOM_COMMAND(TARGET slimevolley
+		COMMAND ./packer
+		DEPENDS slimevolley)
+ELSE(SV_PORTABLE)
+	STRING(COMPARE EQUAL ${CMAKE_INSTALL_PREFIX} /usr USR_PREFIX)
+
+	IF(BIN_DIR)
+		INSTALL(TARGETS slimevolley DESTINATION ${BIN_DIR})
+	ELSE(BIN_DIR)
+		INSTALL(TARGETS slimevolley DESTINATION "bin")
+	ENDIF(BIN_DIR)
+
+	INSTALL(FILES debian/slimevolley.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
+	INSTALL(FILES docs/slimevolley.6 DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man6)
+	INSTALL(FILES docs/slimevolley.6.fr DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/fr/man6 RENAME slimevolley.6)
+ENDIF(SV_PORTABLE)

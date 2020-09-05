@@ -1,0 +1,18 @@
+IF(GETTEXT_RUNTIME_FOUND)
+	SET(catalogname slimevolley)
+ 
+	ADD_CUSTOM_TARGET(translations ALL)
+	
+	FILE(GLOB PO_FILES *.po)
+	
+	FOREACH(_poFile ${PO_FILES})
+		GET_FILENAME_COMPONENT(_lang ${_poFile} NAME_WE)
+		SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
+		IF(GETTEXT_TOOLS_FOUND)
+			ADD_CUSTOM_COMMAND(TARGET translations
+				COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --check -o ${_gmoFile} ${_poFile}
+				DEPENDS ${_poFile})
+		ENDIF(GETTEXT_TOOLS_FOUND)
+		INSTALL(FILES ${_gmoFile} DESTINATION ${I10N_DIR}/${_lang}/LC_MESSAGES/ RENAME ${catalogname}.mo )
+	ENDFOREACH(_poFile ${PO_FILES})
+ENDIF(GETTEXT_RUNTIME_FOUND)

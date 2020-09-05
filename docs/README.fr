@@ -1,0 +1,13 @@
+Slime Volley, version 2.4.2
+
+Slime Volley est une simulation de volley en 2D (orientée arcade), proche des
+jeux en Java du même nom.
+
+Un match se joue en 10 points et oppose 2 équipes comportant 1 à 3 joueurs
+chacune. Un point est marqué lorsqu'une balle touche le sol de l'autre coté du
+filet.
+Il peut y avoir 1 à 8 balles en jeu. Dès qu'une balle touche le sol, le set est
+fini et toutes les balles sont remises en jeu.
+Chaque joueur dispose de 4 touches, 2 touches de déplacement, une touche
+permettant de sauter et une touche permettant de changer de skin
+Vous ne pouvez pas vous déplacer en l'air.

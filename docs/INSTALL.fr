@@ -1,0 +1,38 @@
+Compilation :
+Slime Volley dépend des bibliothèques SDL, SDL_image, SDL_ttf et SDL_Net,
+téléchargeables sur le site de SDL (http://www.libsdl.org/), et disponibles
+dans la majorité des distributions.
+
+Systèmes de type Unix :
+La compilation nécessite entre autres CMake (http://www.cmake.org/).
+Placez vous dans le répertoire de Slime Volley, et tapez la commande :
+cmake .
+puis
+make
+
+Après la compilation, l'exécutable "slimevolley" est créé.
+Vous pouvez l'utiliser directement ou l'installer sur votre système en tapant,
+en mode root :
+make install
+
+Pour désinstaller, supprimez les fichiers listés dans install_manifest.txt
+Vous pouvez également taper :
+cat install_manifest.txt | xargs rm
+en tant que root.
+
+Mac OS X :
+Installez les outils développeur Xcode (Mac OS X 10.4 ou supérieur requis).
+Téléchargez les frameworks SDL, SDL_image et SDL_ttf pour Mac OS X.
+Installez les dossiers *.framework dans /Bibliothèque/Frameworks.
+Enfin, ouvrez le fichier "Slime Volley.xcodeproj" situé dans le dossier
+"macosx". Cliquez sur "Build" pour lancer la compilation.
+L'application compilée sera située dans slime/macosx/build/[Configuration].
+([Configuration] indique la configuration de la compilation : Release ou Debug)
+
+Windows : (par cross-compilation depuis un système Unix)
+Installez minGW depuis : http://www.mingw.org/ ou les paquets fournis par votre
+distribution.
+Placez vous dans le dossier slime/windows, et lancez :
+make
+Pour pouvoir lancer Slime Volley, il sera nécessaire de placer dans un même dossier l'exécutable
+slimevolley.exe, le dossier data et le contenu du dossier dlls.

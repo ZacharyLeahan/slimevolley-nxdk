@@ -1,0 +1,4 @@
+ADD_SUBDIRECTORY(icons)
+ADD_SUBDIRECTORY(slimes)
+ADD_SUBDIRECTORY(themes/default)
+ADD_SUBDIRECTORY(themes/mushrooms)

@@ -1,0 +1,24 @@
+.TH "slimevolley" "6" "2.4.2 " "MCMic & VinDuv" "Jeux"
+.SH "NOM"
+.LP 
+\fBslimevolley\fP \- Simulation non r\['e]aliste de volley en 2D
+.SH "SYNOPSIS"
+.LP 
+\fBslimevolley\fP
+.SH "DESCRIPTION"
+.LP 
+\fBSlime Volley\fP est une simulation de volley en 2D (orient\['e]e arcade), proche des jeux en Java du m\[^e]me nom.
+
+Un match se joue en 10 points et oppose 2 \['e]quipes comportant 1 à 3 joueurs chacune. Un point est marqu\['e] lorsqu'une balle touche le sol de l'autre cot\['e] du filet.
+.br
+Il peut y avoir 1 à 8 balles en jeu. D\[`e]s qu'une balle touche le sol, le set est fini et toutes les balles sont remises en jeu.
+.br
+Chaque joueur dispose de 4 touches, 2 touches de déplacement, une touche permettant de sauter et une touche permettant de changer de skin.
+.br
+Vous ne pouvez pas vous déplacer en l'air.
+ 
+.SH "AUTEURS"
+.LP 
+C\[^o]me Bernigaud <mcmic@free.fr>,
+.br
+Vincent Duvert <vincent.duvert@free.fr>
