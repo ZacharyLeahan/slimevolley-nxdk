@@ -1,1 +1,2 @@
 link-libm.patch
+gcc10.patch
