@@ -1,1 +1,0 @@
-?package(slimevolley):needs="X11" section="Games/Action" title="Slime Volley" command="/usr/games/slimevolley" icon="/usr/share/pixmaps/slimevolley.xpm"
