@@ -1,3 +1,21 @@
+slimevolley (2.4.2+dfsg-3) UNRELEASED; urgency=medium
+
+  * Team upload.
+  * Fix FTBFS with GCC 10. (Closes: #957813)
+  * Update Standards-Version to 4.5.0:
+    - Switch priority from extra to optional
+    - Drop obsolete menu file
+    - Declare that d/rules does not require root
+  * Update debhelper compat level to 13:
+    - Drop --parallel, as it is default
+  * Enable all hardening options.
+  * Import repository to salsa and set Vcs-* fields.
+  * Switch upstream URLs to https.
+  * Remove trailing whitespace.
+  * Mark slimevolley-data as Multi-Arch: foreign.
+
+ -- Reiner Herrmann <reiner@reiner-h.de>  Sat, 05 Sep 2020 17:40:54 +0200
+
 slimevolley (2.4.2+dfsg-2) unstable; urgency=medium
 
   * Team upload.
