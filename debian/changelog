@@ -1,4 +1,4 @@
-slimevolley (2.4.2+dfsg-3) UNRELEASED; urgency=medium
+slimevolley (2.4.2+dfsg-3) unstable; urgency=medium
 
   * Team upload.
   * Fix FTBFS with GCC 10. (Closes: #957813)
@@ -14,7 +14,7 @@ slimevolley (2.4.2+dfsg-3) UNRELEASED; urgency=medium
   * Remove trailing whitespace.
   * Mark slimevolley-data as Multi-Arch: foreign.
 
- -- Reiner Herrmann <reiner@reiner-h.de>  Sat, 05 Sep 2020 17:40:54 +0200
+ -- Reiner Herrmann <reiner@reiner-h.de>  Sun, 20 Sep 2020 23:25:09 +0200
 
 slimevolley (2.4.2+dfsg-2) unstable; urgency=medium
 
