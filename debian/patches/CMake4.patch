@@ -1,0 +1,8 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
++CMAKE_MINIMUM_REQUIRED(VERSION 3.30)
+ IF(COMMAND cmake_policy)
+ 	CMAKE_POLICY(SET CMP0003 NEW)
+ ENDIF(COMMAND cmake_policy)

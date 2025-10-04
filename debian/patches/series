@@ -1,2 +1,3 @@
 link-libm.patch
 gcc10.patch
+CMake4.patch

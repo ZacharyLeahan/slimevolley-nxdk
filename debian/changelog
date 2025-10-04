@@ -1,3 +1,10 @@
+slimevolley (2.4.2+dfsg-4) unstable; urgency=medium
+
+  * Team upload.
+  * Fix FTBFS with CMake 4 (Closes: #1113510)
+
+ -- Alexandre Detiste <tchet@debian.org>  Sat, 04 Oct 2025 13:48:12 +0200
+
 slimevolley (2.4.2+dfsg-3) unstable; urgency=medium
 
   * Team upload.

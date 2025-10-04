@@ -11,11 +11,10 @@ Build-Depends:
  libsdl-net1.2-dev,
  libsdl-ttf2.0-dev,
  libsdl1.2-dev
-Standards-Version: 4.5.0
+Standards-Version: 4.7.2
 Homepage: https://slime.tuxfamily.org/
 Vcs-Git: https://salsa.debian.org/games-team/slimevolley.git
 Vcs-Browser: https://salsa.debian.org/games-team/slimevolley
-Rules-Requires-Root: no
 
 Package: slimevolley
 Architecture: any
