@@ -15,7 +15,7 @@ read -r -a sdl_libs <<< "$(pkg-config --libs sdl2)"
 for variant in desktop xbox; do
     flags=(-DSV_HOST_TEST=1)
     if [ "$variant" = xbox ]; then flags=(-DSV_XBOX=1); fi
-    $cc -g -O1 -fcommon -ffunction-sections -fdata-sections \
+    $cc -DSDL_MAIN_HANDLED -g -O1 -fcommon -ffunction-sections -fdata-sections \
       -fsanitize=address,undefined "${linker[@]}" \
       "${sdl_cflags[@]}" -I"$root/ports/nxdk/tests/include" -I"$root/src" \
       -include "$root/ports/nxdk/tests/HostCompat.h" "${flags[@]}" \
@@ -24,6 +24,6 @@ for variant in desktop xbox; do
     "$root/.local/tests/$variant"
 done
 
-$cc -g -O1 -fsanitize=address,undefined \
+$cc -DSDL_MAIN_HANDLED -g -O1 -fsanitize=address,undefined \
   "${sdl_cflags[@]}" "$root/ports/nxdk/tests/controller.c" -o "$root/.local/tests/controller"
 "$root/.local/tests/controller"
