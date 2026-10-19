@@ -1,0 +1,87 @@
+name: Xbox build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      prerelease_tag:
+        description: 'Optional draft alpha tag, e.g. v0.1.0-alpha.1 (blank builds only)'
+        required: false
+        type: string
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang lld llvm bison flex cmake ninja-build pkg-config libsdl2-dev
+          echo '/usr/lib/llvm-18/bin' >> "$GITHUB_PATH"
+      - name: Host regression tests
+        run: bash ports/nxdk/tools/test-host.sh
+      - name: Build pinned nxdk and game
+        run: bash ports/nxdk/tools/build.sh
+      - name: Package Xbox download and matching source
+        run: python3 ports/nxdk/tools/package.py
+      - name: Upload testing downloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: xbox-${{ github.sha }}
+          path: |
+            artifacts/slimevolley-nxdk-test.zip
+            artifacts/slimevolley-nxdk-source.zip
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xbox-build-logs-${{ github.run_id }}
+          path: logs/build.log
+          if-no-files-found: ignore
+  draft:
+    if: github.event_name == 'workflow_dispatch' && inputs.prerelease_tag != '' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.prerelease_tag }}
+      RELEASE_COMMIT: ${{ github.sha }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: xbox-${{ github.sha }}
+          path: downloads
+      - name: Verify checksums and create draft pre-release
+        working-directory: downloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v0\.[0-9]+\.[0-9]+-alpha\.[1-9][0-9]*$ ]] || { echo 'Use a v0.x.y-alpha.N testing tag'; exit 1; }
+          sha256sum --check SHA256SUMS.txt
+          cat > /tmp/release-notes.md <<'NOTES'
+          Experimental original Xbox testing preview, built with nxdk. Not a stable release.
+
+          Download slimevolley-nxdk-test.zip, extract it, and copy its full contents to a separate game directory on your modded Xbox. Launch default.xbe. Keep data/ alongside it. The source ZIP is for developers, not installation.
+
+          Controller support: D-pad or either stick, A/Up to jump, X/Down to change skin, LT/RT to move left/right, latest opposing direction wins. B/Back returns; Start pauses.
+
+          Hardware acceptance for THIS package: PENDING. Before publishing, install this exact ZIP, verify its XBE hash against BUILD-INFO.json, and replace this paragraph with the test results and known limitations. Four simultaneous physical controllers and retail 64 MB memory qualification remain unverified.
+
+          Includes matching game/port source, pinned SDK identity, build metadata and SHA-256 checksums. See BUILD-INFO.json inside the game ZIP for compiler/SDK/source identity.
+          NOTES
+          gh release create "$RELEASE_TAG" --target "$RELEASE_COMMIT" --draft --prerelease --latest=false \
+            --title "Slime Volley Xbox $RELEASE_TAG — testing preview" \
+            --notes-file /tmp/release-notes.md \
+            slimevolley-nxdk-test.zip slimevolley-nxdk-source.zip SHA256SUMS.txt

@@ -2,18 +2,29 @@
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../../.." && pwd)
 mkdir -p "$root/.local/tests"
+export SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy
+if [ "$(uname -s)" = Darwin ]; then
+    export PATH="/opt/homebrew/opt/llvm/bin:/opt/homebrew/bin:$PATH"
+    export DYLD_LIBRARY_PATH="$(pkg-config --variable=libdir sdl2)${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
+    linker=(-Wl,-dead_strip -Wl,-undefined,dynamic_lookup)
+else
+    linker=(-Wl,--gc-sections)
+fi
+cc=${HOST_CC:-clang}
+read -r -a sdl_cflags <<< "$(pkg-config --cflags sdl2)"
+read -r -a sdl_libs <<< "$(pkg-config --libs-only-L sdl2) -lSDL2"
 for variant in desktop xbox; do
     flags=(-DSV_HOST_TEST=1)
     if [ "$variant" = xbox ]; then flags=(-DSV_XBOX=1); fi
-    /opt/homebrew/opt/llvm/bin/clang -g -O1 -fcommon -ffunction-sections -fdata-sections \
-      -fsanitize=address,undefined -Wl,-dead_strip -Wl,-undefined,dynamic_lookup \
-      -I/opt/homebrew/include/SDL2 -I"$root/ports/nxdk/tests/include" -I"$root/src" \
+    $cc -DSDL_MAIN_HANDLED -g -O1 -fcommon -ffunction-sections -fdata-sections \
+      -fsanitize=address,undefined "${linker[@]}" \
+      "${sdl_cflags[@]}" -I"$root/ports/nxdk/tests/include" -I"$root/src" \
       -include "$root/ports/nxdk/tests/HostCompat.h" "${flags[@]}" \
       "$root/ports/nxdk/tests/core.c" "$root/src/jeu.c" "$root/src/audio.c" "$root/src/menu_jeu.c" \
-      -L/opt/homebrew/lib -lSDL2 -o "$root/.local/tests/$variant"
-    DYLD_LIBRARY_PATH=/opt/homebrew/lib "$root/.local/tests/$variant"
+      "${sdl_libs[@]}" -o "$root/.local/tests/$variant"
+    "$root/.local/tests/$variant"
 done
 
-/opt/homebrew/opt/llvm/bin/clang -g -O1 -fsanitize=address,undefined \
-  -I/opt/homebrew/include/SDL2 "$root/ports/nxdk/tests/controller.c" -o "$root/.local/tests/controller"
+$cc -DSDL_MAIN_HANDLED -g -O1 -fsanitize=address,undefined \
+  "${sdl_cflags[@]}" "$root/ports/nxdk/tests/controller.c" -o "$root/.local/tests/controller"
 "$root/.local/tests/controller"

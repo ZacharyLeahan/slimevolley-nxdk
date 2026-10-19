@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
+// Based on espkvm-xbox/tools/xbox-button.mjs at 61f43235c024d9738d9a37342d334512dc74a82c.
+// Local additions: bounded multi-button chords and this repository's usage path.
 // Node 22+: bounded button test using the existing KVM keyboard transport.
 const keys = {
   up: 0x52, down: 0x51, left: 0x50, right: 0x4f,

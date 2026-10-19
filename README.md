@@ -93,3 +93,9 @@ See [the original README](docs/README) for the existing game documentation.
 Game code is GPL-3.0-or-later. Artwork, sounds, fonts, and packaging have their
 own notices. Preserve these when modifying or distributing the game; see
 [the detailed copyright and license notices](debian/copyright).
+
+### Testing builds and releases
+
+GitHub Actions builds downloadable Xbox testing packages containing `default.xbe`,
+required assets, licenses and build metadata. Releases remain alpha pre-releases
+until testing establishes readiness. See [build downloads and release steps](ports/nxdk/RELEASING.md).

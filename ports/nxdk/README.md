@@ -65,11 +65,12 @@ ports/nxdk/tools/build.sh
 python3 ports/nxdk/tools/package.py
 ```
 
-SDK: XboxDev/nxdk `c5c574c6ba5778595b782064044ff56b407e835b`, recursive
-submodules, with the two patches in `patches/`. The initial SDK copy came from
+SDK: XboxDev/nxdk `14d5ee97e73347c973f1f57b68b79ec08c9e77f2`, recursive
+submodules, with the three patches in `patches/`. The initial SDK copy came from
 the local Super Mario War port; it is isolated under ignored `.local/nxdk`.
 The patches preserve that reference's deterministic XBE timestamp support and
-bounded SDL audio-thread shutdown wait. They are recorded, not silently assumed.
+bounded SDL audio-thread shutdown wait, plus the AC97 ready-link fix formerly
+held in the local SDK commit. They are recorded, not silently assumed.
 
 `SOURCE_DATE_EPOCH` defaults to the game HEAD commit timestamp and is passed to
 the linker and patched cxbe. The package records individual source hashes,
@@ -141,3 +142,7 @@ proof of a 64 MB memory budget on an upgraded console.
 Reference: the local Super Mario War project's NXDK build, FTP readback,
 exact-hash acceptance and KVM workflow. `tools/kvm-button.mjs` is copied from
 the local ESP-KVM project's Apache-2.0 bounded input helper.
+
+KVM tooling reference: [espkvm-xbox at 61f43235](https://github.com/ZacharyLeahan/espkvm-xbox/tree/61f43235c024d9738d9a37342d334512dc74a82c).
+This pins the helper/protocol reference for agentic testing; it does not assert
+that the connected KVM is running that firmware revision.
