@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 #define SV_COMPAT_IMPLEMENTATION
 #include "Compat.h"
+#include "Controller.h"
 #include "slime.h"
 #include "themes.h"
 #include <windows.h>
@@ -129,20 +130,16 @@ static void controllers(void) {
     static const SDL_Keycode codes[8]={SDLK_UP,SDLK_DOWN,SDLK_LEFT,SDLK_RIGHT,SDLK_RETURN,SDLK_ESCAPE,SDLK_SPACE,SDLK_x};
     for(int i=0;i<4;i++) {
         unsigned b=0; SDL_Joystick *p=pads[i];
+        SvPadState state={0};
         if(p) {
-            Uint8 h=SDL_JoystickGetHat(p,0);
-            Sint16 x=SDL_JoystickGetAxis(p,0),y=SDL_JoystickGetAxis(p,1);
-            if((h&SDL_HAT_UP)||y<-12000) b|=1;
-            if((h&SDL_HAT_DOWN)||y>12000) b|=2;
-            if((h&SDL_HAT_LEFT)||x<-12000) b|=4;
-            if((h&SDL_HAT_RIGHT)||x>12000) b|=8;
-            if(SDL_JoystickGetButton(p,0)) b|=16;
-            if(SDL_JoystickGetButton(p,1)||SDL_JoystickGetButton(p,6)) b|=32;
-            if(SDL_JoystickGetButton(p,7)) b|=64;
-            if(SDL_JoystickGetButton(p,2)) b|=128;
+            state.hat=SDL_JoystickGetHat(p,0);
+            for(int axis=0;axis<6;axis++) state.axes[axis]=SDL_JoystickGetAxis(p,axis);
+            for(int button=0;button<10;button++)
+                if(SDL_JoystickGetButton(p,button)) state.buttons|=1u<<button;
+            b=sv_pad_mask(&state);
         }
         held[i]=b;
-        if((b&96)==96) {
+        if(sv_pad_recovery(&state)) {
             if(!reset_since[i]) reset_since[i]=SDL_GetTicks();
             else if(SDL_GetTicks()-reset_since[i]>=2000) {printf("Back+Start recovery\n");fflush(NULL);XReboot();}
         } else reset_since[i]=0;
@@ -197,7 +194,7 @@ void sv_quit(void) {
 }
 void sv_controls_help(void) {
     SDL_BlitSurface(fond,NULL,ecran,NULL);
-    const char *lines[]={"Xbox controls","Move: D-pad / left stick","Jump: A / D-pad Up","Change skin: X / D-pad Down","Menus: A selects, B / Back returns","Pause / resume: Start","Players use controller ports 1-4","Main menu: Back opens Exit / System","Press B to return"};
+    const char *lines[]={"Xbox controls","Move: D-pad / either stick / triggers","Jump: A / Up on D-pad or either stick","Skin: X / Down on D-pad or either stick","Menus: A selects, B / Back returns","Pause / resume: Start","Players use controller ports 1-4","Main menu: Back opens Exit / System","Press B to return"};
     for(unsigned i=0;i<sizeof(lines)/sizeof(lines[0]);i++)
         afficher((char*)lines[i],police,coul_txt_menu,70,110+i*40);
     sv_flip(ecran);SDL_Event e;

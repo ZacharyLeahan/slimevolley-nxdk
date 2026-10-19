@@ -14,7 +14,9 @@ XBE hash in `test-results/acceptance.json`, not inferred from compilation.
 - Original 800x600 logical playfield, scaled to 640x480 output by SDL2 surfaces.
 - Select `Controller 1`–`Controller 4` on the team screen to assign physical
   Xbox ports 1–4. Menus accept any controller.
-- D-pad/left stick move; A or Up jump; X or Down change skin. A selects,
+- D-pad/either stick move; left/right triggers also move left/right.
+  A or Up on the D-pad/either stick jumps; X or Down changes skin.
+  Opposing directions cancel; repeated controls in the same direction combine. A selects,
   B/Back returns, Start pauses/resumes. Hold Back+Start two seconds to reboot.
 - `Options > Controls` displays Xbox button mappings and player-port help.
   Xbox Options omits the desktop fullscreen toggle.

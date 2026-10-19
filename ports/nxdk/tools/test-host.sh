@@ -13,3 +13,7 @@ for variant in desktop xbox; do
       -L/opt/homebrew/lib -lSDL2 -o "$root/.local/tests/$variant"
     DYLD_LIBRARY_PATH=/opt/homebrew/lib "$root/.local/tests/$variant"
 done
+
+/opt/homebrew/opt/llvm/bin/clang -g -O1 -fsanitize=address,undefined \
+  -I/opt/homebrew/include/SDL2 "$root/ports/nxdk/tests/controller.c" -o "$root/.local/tests/controller"
+"$root/.local/tests/controller"
