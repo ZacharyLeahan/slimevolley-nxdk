@@ -29,8 +29,12 @@ $Id: slime.h 236 2008-11-01 09:45:35Z vinduv $
 
 #define NUM_CONFIGS 4
 
+#ifdef SV_XBOX
+#define NB_JOUEURS_G 2
+#else
 #define NB_JOUEURS_G 3
-#define NB_JOUEURS_T 6
+#endif
+#define NB_JOUEURS_T (2 * NB_JOUEURS_G)
 
 #define MAX_BALLES 8
 

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-19",
+  "xbe_sha256": "a5d0010cbfdf9fc4d29012cb1a9b585249d02d2f5c39bcfa955837313e86e1c4",
+  "status": "first functional hardware play test passed; performance tuning and broader qualification remain",
+  "checks": {
+    "host_sanitizers": "desktop and Xbox variants passed team bounds/skin selection and callback silence/conversion length",
+    "clean_rebuild": "full SDK/game clean rebuild produced byte-identical XBE",
+    "xbe_structure": "valid section/header bounds; LIMIT64MB flag enabled",
+    "deployment": "76 files uploaded and individually read back by SHA256",
+    "boot": "main menu rendered in fresh MJPEG stream; no gameplay acceptance inferred",
+    "final_controller_gameplay": "Passed: observed D-pad/stick movement, jump, skin change, pause/resume, 2v2 rallies, 1v1 through 0-10 results, return to menu and clean exit.",
+    "final_audio": "Complete 12-second stereo capture with nonzero output; no subjective listening acceptance.",
+    "post_play_readback": "Installed executable retrieved after play matches the expected SHA256.",
+    "performance": "Four-slot presentation samples median 31.7 FPS; intended 50 FPS not met.",
+    "warm_relaunch": "Observed main menu after another launch of the verified installed package."
+  },
+  "rebuild_sha256": "a5d0010cbfdf9fc4d29012cb1a9b585249d02d2f5c39bcfa955837313e86e1c4",
+  "sdk_commit": "c5c574c6ba5778595b782064044ff56b407e835b",
+  "reference_gameplay_record": "first-playable.json",
+  "console_directory": "F:\\SlimeVolley-nxdk-test",
+  "raw_evidence_directory": "/Users/zach/Developer/github.com/ZacharyLeahan/slimevolley-nxdk/logs/hardware",
+  "remaining": [
+    "Four simultaneous human controllers and every port/reconnect permutation untested.",
+    "Physical stock-64-MB console and constrained allocation budget unverified.",
+    "Cold-start repetition, all themes/speeds/multiball combinations, long soak and settings-reload acceptance remain open.",
+    "Captured audio has not had human listening review.",
+    "No game-side audio underrun instrumentation; capture counters are not game underrun counters."
+  ],
+  "notes": [
+    "Final executable changes after the earlier playable candidate include platform-only input polling, shutdown guarding, integer diagnostics and deterministic build timestamps.",
+    "The first exploratory launch preceded completed full-file verification; no acceptance is based on that trial.",
+    "The earlier KVM USB interruption cleared before play; final-binary results now supersede the inconclusive input check.",
+    "Console left at the game main menu after the completed play test and one warm relaunch."
+  ],
+  "package_note": "The downloadable package/source archive was refreshed with documentation and tooling after deployment. Its XBE and game assets match the verified install; the original uploaded archive is retained as artifacts/slimevolley-nxdk-deployed.zip.",
+  "gameplay_record": "gameplay-20261019.json"
+}

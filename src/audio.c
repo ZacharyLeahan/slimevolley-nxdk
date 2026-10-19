@@ -39,10 +39,8 @@ void mixeur(void* userdata, Uint8* stream, int len) {
 
 	(void)userdata; /* unused parameter */
 
-	if(son_act == NULL) {
-		SDL_PauseAudio(1);
-		return;
-	}
+	memset(stream, format_obtenu.silence, len);
+	if(son_act == NULL) return;
 
 	long_copie = son_act->longueur - son_pos;
 
@@ -62,11 +60,11 @@ void mixeur(void* userdata, Uint8* stream, int len) {
  }
 
 void init_son(void) {
-	SDL_AudioSpec format_voulu;
+	SDL_AudioSpec format_voulu = {0};
 
 	/* Son 16 bits stéréo - 44100 Hz */
 	format_voulu.freq = 44100;
-	format_voulu.format = 0;
+	format_voulu.format = AUDIO_S16SYS;
 	format_voulu.channels = 2;
 
 	/* Taille de tampon audio (512 : bon compromis latence/fluidité) */
@@ -108,6 +106,7 @@ void conversion_son(SDL_AudioSpec format_son, Uint8 id) {
 	SDL_FreeWAV(sons[id].donnees); /* On efface les données audio originales */
 	sons[id].donnees = malloc(cvt.len_cvt); /* Et on met les nouvelles à la place */
 	memcpy(sons[id].donnees, cvt.buf, cvt.len_cvt);
+	sons[id].longueur = cvt.len_cvt;
 	free(cvt.buf);
 }
 
@@ -129,9 +128,11 @@ void joue_son(Sint8 id) {
 			return;
 		}
 	}
+	SDL_LockAudio();
 	son_pos = 0;
 	son_act = &sons[id]; /* On règle le son actuel... */
 
+	SDL_UnlockAudio();
 	SDL_PauseAudio(0); /* Et on lance la lecture. */
 }
 

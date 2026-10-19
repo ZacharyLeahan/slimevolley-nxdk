@@ -58,6 +58,13 @@ const config_slime configs[NUM_CONFIGS] = {
 	{ -300, -150, 150,	0.15,		500,		400,	0 },	/* Furie */
 };
 
+/* Sample the clock once: a second read after the deadline can underflow
+ * the unsigned delay and put gameplay to sleep for almost 49 days. */
+Uint32 delai_image(Uint32 debut, Uint32 maintenant) {
+	Uint32 ecoule = maintenant - debut;
+	return ecoule < 2000/MAX_FPS ? 2000/MAX_FPS - ecoule : 0;
+}
+
 void multiplie_config(void) {
 	conf.saut_vy		+= (configs[act_conf].saut_vy) * conf.coefficient;
 	conf.saut_g_vx		+= (configs[act_conf].saut_g_vx) * conf.coefficient;
@@ -85,7 +92,7 @@ void init_jeu(void) {
 	Uint8 i;
 	SDL_Surface** temp_skins;
 
-	if(tab_joueurs[2].type != DESACTIVE) { /* Mode 3 joueurs à gauche */
+	if(NB_JOUEURS_G == 3 && tab_joueurs[NB_JOUEURS_G - 1].type != DESACTIVE) { /* Mode 3 joueurs à gauche */
 		num_gauche = 3;
 		temp_skins = img_3J_jg;
 
@@ -112,11 +119,11 @@ void init_jeu(void) {
 		tab_joueurs[i].lim_droite = FILET_GAUCHE - temp_skins[0]->w;
 	}
 
-	if(tab_joueurs[5].type != DESACTIVE) { /* Mode 3 joueurs à droite */
+	if(NB_JOUEURS_G == 3 && tab_joueurs[NB_JOUEURS_T - 1].type != DESACTIVE) { /* Mode 3 joueurs à droite */
 		num_droite = 3;
 		temp_skins = img_3J_jd;
 
-	} else if(tab_joueurs[4].type != DESACTIVE) { /* Mode 2 joueurs à droite */
+	} else if(tab_joueurs[NB_JOUEURS_G + 1].type != DESACTIVE) { /* Mode 2 joueurs à droite */
 		num_droite = 2;
 		temp_skins = img_2J_jd;
 
@@ -727,9 +734,8 @@ Uint8 fonc_set(void) {
 
 		SDL_Flip(ecran);
 
-		if(SDL_GetTicks() - temps_prec < (2000/MAX_FPS)) { /* Il faut attendre un peu */
-			SDL_Delay((2000/MAX_FPS) - (SDL_GetTicks() - temps_prec));
-		}
+		Uint32 attente = delai_image(temps_prec, SDL_GetTicks());
+		if(attente) SDL_Delay(attente);
 
 		temps_prec = temps_act;
 		cpt_fps++;
@@ -923,9 +929,8 @@ void fin_jeu(bool gagne_droite) {
 
 		SDL_Flip(ecran);
 
-		if(SDL_GetTicks() - temps_prec < (2000/MAX_FPS)) { /* Il faut attendre un peu */
-			SDL_Delay((2000/MAX_FPS) - (SDL_GetTicks() - temps_prec));
-		}
+		Uint32 attente = delai_image(temps_prec, SDL_GetTicks());
+		if(attente) SDL_Delay(attente);
 		temps_prec = temps_act;
 	}
 }

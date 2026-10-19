@@ -1,0 +1,11 @@
+.local/
+artifacts/
+logs/
+*.obj
+*.c.d
+ports/nxdk/bin/
+ports/nxdk/main.exe
+ports/nxdk/main.lib
+ports/nxdk/.build-config
+__pycache__/
+*.pyc

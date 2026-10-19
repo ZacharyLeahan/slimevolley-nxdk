@@ -50,7 +50,11 @@ void change_conf(Uint8 id) {
 	if(id != 0 && id != NB_JOUEURS_G && tab_joueurs[id - 1].type == DESACTIVE) return;
 
 	if(tab_joueurs[id].type == DESACTIVE
-		|| (tab_joueurs[id].type == DERN_CONFIG && (id == 0 || id == NB_JOUEURS_G))) {
+		|| (tab_joueurs[id].type == DERN_CONFIG && (id == 0 || id == NB_JOUEURS_G)
+#ifdef SV_XBOX
+			&& tab_joueurs[id].niveau == NB_NIVEAUX-1
+#endif
+		)) {
 		/* Passage à la configuration clavier 0 */
 
 		conf = -1;
@@ -63,6 +67,9 @@ void change_conf(Uint8 id) {
 		tab_joueurs[id].type = CLAVIER;
 		if(conf == -1) { /* Toutes les configurations sont occupées, on prend la 0 */
 			tab_joueurs[id].type++;
+#ifdef SV_XBOX
+			tab_joueurs[id].niveau = NOOB;
+#endif
 		} else {
 			conf_clav_act[conf] = id;
 			tab_joueurs[id].conf_clavier = conf;
@@ -81,6 +88,9 @@ void change_conf(Uint8 id) {
 		}
 		if(conf == tab_joueurs[id].conf_clavier) {
 			tab_joueurs[id].type++;
+#ifdef SV_XBOX
+			tab_joueurs[id].niveau = NOOB;
+#endif
 		} else {
 			conf_clav_act[conf] = id;
 			tab_joueurs[id].conf_clavier = conf;
@@ -108,12 +118,19 @@ void change_conf(Uint8 id) {
 		if(tab_joueurs[id].type == CLAVIER) conf_clav_act[tab_joueurs[id].conf_clavier] = -1;
 		if(tab_joueurs[id].type == INT_ART) tab_joueurs[id].niveau = NOOB;
 		tab_joueurs[id].type++;
+#ifdef SV_XBOX
+		if(tab_joueurs[id].type == INT_ART) tab_joueurs[id].niveau = NOOB;
+#endif
 	}
 
 }
 
 void menu_jeu(void) {
+#ifdef SV_XBOX
+	const char* noms_confs[] = { "Disabled", "Controller %d", "AI, level %d", "Remote" };
+#else
 	const char* noms_confs[] = { N_("Disabled"), N_("Local, key set %c"), N_("AI, level %d"), N_("Remote") };
+#endif
 
 	char tmp_chaine[40], tmp_chaine2[40];
 
@@ -175,13 +192,19 @@ void menu_jeu(void) {
 			}
 
 			if(tab_joueurs[i].type == CLAVIER) {
-				snprintf4(tmp_chaine2, 40, _(noms_confs[CLAVIER]), 'A' + tab_joueurs[i].conf_clavier);
-				snprintf5(tmp_chaine, 40, _("#%d: %s"), (i < NB_JOUEURS_G ? i + 1 : i - 2), tmp_chaine2);
+				snprintf4(tmp_chaine2, 40, _(noms_confs[CLAVIER]),
+#ifdef SV_XBOX
+				tab_joueurs[i].conf_clavier + 1
+#else
+				'A' + tab_joueurs[i].conf_clavier
+#endif
+			);
+				snprintf5(tmp_chaine, 40, _("#%d: %s"), (i < NB_JOUEURS_G ? i + 1 : i - NB_JOUEURS_G + 1), tmp_chaine2);
 			} else if(tab_joueurs[i].type == INT_ART) {
 				snprintf4(tmp_chaine2, 40, _(noms_confs[INT_ART]), tab_joueurs[i].niveau);
-				snprintf5(tmp_chaine, 40, _("#%d: %s"), (i < NB_JOUEURS_G ? i + 1 : i - 2), tmp_chaine2);
+				snprintf5(tmp_chaine, 40, _("#%d: %s"), (i < NB_JOUEURS_G ? i + 1 : i - NB_JOUEURS_G + 1), tmp_chaine2);
 			} else {
-				snprintf5(tmp_chaine, 40, _("#%d: %s"), (i < NB_JOUEURS_G ? i + 1 : i - 2), _(noms_confs[tab_joueurs[i].type]));
+				snprintf5(tmp_chaine, 40, _("#%d: %s"), (i < NB_JOUEURS_G ? i + 1 : i - NB_JOUEURS_G + 1), _(noms_confs[tab_joueurs[i].type]));
 			}
 
 			s_texte = TTF_RenderUTF8_Blended(police, tmp_chaine, coul_txt_menu);
@@ -220,17 +243,28 @@ void menu_jeu(void) {
 		} else if(id_act < NB_JOUEURS_T) {
 			switch(tab_joueurs[id_act].type) {
 				case CLAVIER:
+#ifdef SV_XBOX
+					aff_aide("Use the controller in the selected Xbox port.\nPress A to cycle player settings.");
+#else
 					aff_aide(_("This player will be controlled from the keyboard.\n"
 						"You can change the key configurations in the Options menu."));
+#endif
 				break;
 				case INT_ART:
+#ifdef SV_XBOX
+					aff_aide("AI controls this player.\nPress A to cycle player settings.");
+#else
 					aff_aide(_("This player will be controlled by the computer."));
+#endif
 				break;
 				case DISTANT:
 					aff_aide(_("This player will be controlled by a remote computer on local network.\n"
 						"You will need to allow connections to your computer on port 2222."));
 				break;
 				default:
+#ifdef SV_XBOX
+					aff_aide("Press A to add this teammate.");
+#endif
 				break;
 			}
 		}

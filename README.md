@@ -5,11 +5,13 @@ Development fork of Slime Volley for a planned original Xbox port using
 
 ## Status
 
-Source imported; Xbox porting has not started. No Xbox build or hardware
-compatibility is claimed yet.
+An NXDK test build now exists, with the original game core preserved and an
+Xbox-specific limit of two players per side. See [the port documentation](ports/nxdk/README.md)
+for builds, deployment, controls and exact-hash hardware test scope.
 
-The intended scope is local multiplayer, including four independently controlled
-player slots for repeatable hardware-in-the-loop testing on a real Xbox.
+The Xbox target is local multiplayer with four independently assigned controller
+slots. The desktop build retains the original six-player limit. Hardware tests
+use the existing Xbox/ESP IP KVM workflow.
 
 ## Source and attribution
 

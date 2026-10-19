@@ -135,6 +135,8 @@ void fin_prog(void) {
 
 	SDL_FreeSurface(ecran);
 
+	stop_son();
+	SDL_CloseAudio();
 	libere_themes();
 
 #ifdef NET_SUPPORT
@@ -142,7 +144,6 @@ void fin_prog(void) {
 #endif
 
 	TTF_Quit();
-	SDL_CloseAudio();
 	SDL_Quit();
 
 	config_fich = fopen(conf_chemin, "wb");

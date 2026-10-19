@@ -22,11 +22,15 @@ $Id: jeu.h 247 2008-11-11 13:02:23Z mcmic $
 #ifndef _JEU_H
 #define _JEU_H 1
 
+#include <SDL.h>
+
 #define HAUT_SOL 20
 
 #define FILET_GAUCHE 397
 #define FILET_DROITE 403
 #define FILET_HAUT 70 /* hauteur du filet */
+
+Uint32 delai_image(Uint32 debut, Uint32 maintenant);
 
 void jeu_srv(void);
 void jeu_clt(void);

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-19",
+  "xbe_sha256": "c9971c44b0476aa2c42858915fc69ad9a4983ee75e35f15c8c597f3af0c39630",
+  "scope": "Earlier development candidate; results do not qualify a different executable.",
+  "checks": {
+    "complete_file_readback": 76,
+    "main_menu": "fresh MJPEG frame",
+    "team_screen": "two slots per side",
+    "navigation": "KVM button commands produced observed screen changes",
+    "gameplay": "1v1 setup with local A and AI level 0; scoring reached 0-1",
+    "pause_resume": "Paused overlay captured; resumed screen captured",
+    "audio": "10 seconds s16le 48000 Hz stereo, complete, nonzero both channels, no capture overruns; no subjective listening acceptance",
+    "shutdown": "audio closed and SDL shutdown complete in retrieved game log; dashboard returned",
+    "settings": "legacy preferences written with default theme and flags 11"
+  },
+  "limitations": [
+    "The KVM-driven gameplay player assignment/movement/jump was not established on this run.",
+    "No completed ten-point match or 2v2 acceptance.",
+    "Floating-point printf diagnostics were invalid; no performance or memory numbers accepted from this candidate."
+  ],
+  "evidence_directory": "/Users/zach/Developer/github.com/ZacharyLeahan/slimevolley-nxdk/logs/hardware",
+  "audio_wav_sha256": "f90602941fa6d0cfc92c66f540ed18dab12d249d838d09719c2e0c38b62a85f9"
+}
