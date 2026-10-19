@@ -29,5 +29,19 @@ int main(void) {
     p.buttons=(1u<<6);assert(!sv_pad_recovery(&p));
     p.buttons|=1u<<7;assert(sv_pad_recovery(&p));
     memset(&p,0,sizeof(p));assert(sv_pad_mask(&p)==0 && !sv_pad_recovery(&p));
+    SvPadHistory h={0};memset(&p,0,sizeof(p));
+    p.axes[5]=32767;assert(sv_pad_resolve(&p,&h)==SV_RIGHT);
+    p.axes[2]=32767;assert(sv_pad_resolve(&p,&h)==SV_LEFT);
+    assert(sv_pad_resolve(&p,&h)==SV_LEFT); /* no oscillation while held */
+    p.axes[2]=-32768;assert(sv_pad_resolve(&p,&h)==SV_RIGHT);
+    p.hat=SDL_HAT_LEFT;assert(sv_pad_resolve(&p,&h)==SV_LEFT);
+    p.axes[3]=32767;assert(sv_pad_resolve(&p,&h)==SV_RIGHT); /* new duplicate */
+    p.axes[3]=0;assert(sv_pad_resolve(&p,&h)==SV_RIGHT);
+    p.axes[5]=-32768;assert(sv_pad_resolve(&p,&h)==SV_LEFT);
+    p.hat=SDL_HAT_UP;assert(sv_pad_resolve(&p,&h)==SV_UP);
+    p.axes[4]=32767;assert(sv_pad_resolve(&p,&h)==SV_DOWN);
+    p.axes[4]=0;assert(sv_pad_resolve(&p,&h)==SV_UP);
+    memset(&p,0,sizeof(p));assert(sv_pad_resolve(&p,&h)==0);
+    p.axes[2]=p.axes[5]=32767;assert(sv_pad_resolve(&p,&h)==0);
     puts("PASS: both sticks, triggers, deadzones, duplicate/opposing inputs, buttons and recovery chord");
 }

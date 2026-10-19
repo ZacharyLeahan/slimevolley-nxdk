@@ -36,3 +36,17 @@ Raw evidence is retained locally under `logs/hardware/controller-*`.
 
 Four simultaneous physical controllers, hotplug permutations, analog drift on
 multiple retail pads and every menu/screen remain unverified.
+
+## Last-pressed follow-up
+
+Opposing directions now prioritize the latest newly pressed control. Releasing
+that direction falls back to any still-held opposite. Each input source has
+its own press history, including duplicate directions across sticks and triggers.
+Exact simultaneous opposites keep the previous winner, or stay neutral if no
+winner exists. Disconnect clears the port history. Host regression tests cover
+trigger reversal/release, cross-control duplicate presses, vertical reversal,
+held-input stability and simultaneous opposites.
+
+The follow-up Xbox build SHA-256 is
+`d8615e0864af258ea18bba71510b3cdab1406c2742153278d52eda84c73df4e0`.
+This supersedes the neutral-opposites behavior tested above.
