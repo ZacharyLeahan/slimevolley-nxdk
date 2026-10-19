@@ -2,6 +2,7 @@
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../../.." && pwd)
 mkdir -p "$root/.local/tests"
+export SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy
 if [ "$(uname -s)" = Darwin ]; then
     export PATH="/opt/homebrew/opt/llvm/bin:/opt/homebrew/bin:$PATH"
     linker=(-Wl,-dead_strip -Wl,-undefined,dynamic_lookup)
