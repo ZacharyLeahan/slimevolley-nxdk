@@ -2,7 +2,7 @@
 
 The Xbox build workflow runs host sanitizer tests, checks out the pinned nxdk
 SDK and our patches, compiles the XBE, and uploads testing downloads. It runs on
-main, codex branches, pull requests and manually. No console credentials or KVM
+main, pull requests and manually. No console credentials or KVM
 connection are needed on GitHub. A successful build does not imply hardware acceptance.
 
 ## Get a testing build
