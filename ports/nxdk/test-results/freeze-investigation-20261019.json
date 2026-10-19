@@ -1,0 +1,111 @@
+{
+  "reported_symptom": "Gameplay froze after approximately one minute",
+  "prior_xbe_sha256": "a5d0010cbfdf9fc4d29012cb1a9b585249d02d2f5c39bcfa955837313e86e1c4",
+  "preserved_runtime": "logs/hardware/freeze-reported-runtime",
+  "prior_runtime_observation": "Log stops during gameplay, no shutdown complete; no watchdog log present",
+  "finding": "Both frame limiters sampled SDL_GetTicks twice. Crossing the deadline between samples can underflow Uint32 delay to 4294967295 milliseconds. This is a demonstrated code defect; the specific hardware hang cannot be conclusively attributed without a stack trace.",
+  "fix": "Single clock sample, unsigned elapsed subtraction, clamp overdue frames to zero delay",
+  "host_validation": "Desktop and Xbox player-count variants passed ASan/UBSan; frame-delay regression checks include before/at/after deadline, overdue frames, clock wraparound, and 100000 elapsed values",
+  "corrected_xbe_sha256": "950bd55cac49505dcae166433cf043941faf9b74b6caabf05552e65fe15e3e01",
+  "hardware_validation": {
+    "active_input_seconds": 327.9,
+    "configuration": "1v1, normal speed, one ball, human left assigned key set A / controller port 1, level-0 AI right",
+    "actions": "Repeated left/right movement, jumps, skin changes; scoring and repeated match-end/restart transitions; pause/resume verified before and pause verified after active soak",
+    "result": "No observed gameplay freeze during the active soak",
+    "limitations": "Does not establish indefinite stability or prove the original hang had this cause. MJPEG screenshots 7-11 failed when KVM switched to H.264; H.264-compatible stills at approximately four and five minutes confirmed gameplay progress.",
+    "samples": [
+      {
+        "elapsed_seconds": 27.3,
+        "image": "logs/hardware/freeze-fix-active-01.jpg",
+        "input_success": true,
+        "capture_success": true
+      },
+      {
+        "elapsed_seconds": 54.7,
+        "image": "logs/hardware/freeze-fix-active-02.jpg",
+        "input_success": true,
+        "capture_success": true
+      },
+      {
+        "elapsed_seconds": 82.1,
+        "image": "logs/hardware/freeze-fix-active-03.jpg",
+        "input_success": true,
+        "capture_success": true
+      },
+      {
+        "elapsed_seconds": 109.4,
+        "image": "logs/hardware/freeze-fix-active-04.jpg",
+        "input_success": true,
+        "capture_success": true
+      },
+      {
+        "elapsed_seconds": 136.8,
+        "image": "logs/hardware/freeze-fix-active-05.jpg",
+        "input_success": true,
+        "capture_success": true
+      },
+      {
+        "elapsed_seconds": 164.3,
+        "image": "logs/hardware/freeze-fix-active-06.jpg",
+        "input_success": true,
+        "capture_success": true
+      },
+      {
+        "elapsed_seconds": 191.5,
+        "image": "logs/hardware/freeze-fix-active-07.jpg",
+        "input_success": true,
+        "capture_success": false
+      },
+      {
+        "elapsed_seconds": 218.7,
+        "image": "logs/hardware/freeze-fix-active-08.jpg",
+        "input_success": true,
+        "capture_success": false
+      },
+      {
+        "elapsed_seconds": 246.0,
+        "image": "logs/hardware/freeze-fix-active-09.jpg",
+        "input_success": true,
+        "capture_success": false
+      },
+      {
+        "elapsed_seconds": 273.2,
+        "image": "logs/hardware/freeze-fix-active-10.jpg",
+        "input_success": true,
+        "capture_success": false
+      },
+      {
+        "elapsed_seconds": 300.4,
+        "image": "logs/hardware/freeze-fix-active-11.jpg",
+        "input_success": true,
+        "capture_success": false
+      },
+      {
+        "elapsed_seconds": 327.9,
+        "image": "logs/hardware/freeze-fix-active-12.jpg",
+        "input_success": true,
+        "capture_success": true
+      }
+    ],
+    "runtime_log": "logs/hardware/freeze-fixed-runtime/slime.log",
+    "normal_shutdown": true,
+    "watchdog_log_present": false,
+    "post_run_xbe_sha256": "950bd55cac49505dcae166433cf043941faf9b74b6caabf05552e65fe15e3e01"
+  },
+  "evidence_sha256": {
+    "logs/hardware/freeze-fix-active-h264-5min.jpg": "f754d91f7fd276e2b4bd56a7fc766e2b4fba297d984fafe3b0ec7df7099af059",
+    "logs/hardware/freeze-fix-active-start.jpg": "36665f2b6cdb5205fbcc368e4d88f741f74ec155b438441c82b822b55afc255a",
+    "logs/hardware/freeze-fix-active-01.jpg": "6e7cc0b3bbe8463f0905eec67af4e1c6dddb940277577a395754f9517195370d",
+    "logs/hardware/freeze-fix-active-02.jpg": "fd427022de67a1f6f7b57c071a6de8227b5d579e056fe9d9227f1f449fbb9c85",
+    "logs/hardware/freeze-fix-active-03.jpg": "7bbca4e39362a1c4bf77beb150c1e5083f18a6c2d5f9e013928009e57355f3e5",
+    "logs/hardware/freeze-fix-active-12.jpg": "08674ce981f3111ac4a303e69e093b69f40b56a967a7d6aacf42cb0fd6f6efff",
+    "logs/hardware/freeze-fix-active-06.jpg": "1ccba51b39bf2462842fa2c003881c563f709ff293fa0bb98ce38cb291ab033c",
+    "logs/hardware/freeze-fix-active-04.jpg": "5455990d49b7427ef41b01d2b15159f543f7b6f915c1ee210181bcb7a1b038eb",
+    "logs/hardware/freeze-fix-active-05.jpg": "aedf73944d1c0bc536d822485341e808acc110630bbb6d75a9387b93724c3bd7",
+    "logs/hardware/freeze-fix-active-h264-4min.jpg": "7ee1202a9968d09121fd3302a6f1cdb0bac52b9d381bf168739f706cd895fc0f",
+    "logs/hardware/freeze-fix-final-pause.jpg": "9ebc6b4870669ddbf977fbd1644870b9b78ff57d59bfa78e9e260545ff8743db",
+    "logs/hardware/freeze-fix-verified-setup.jpg": "09a86965143640ce2024152f432f7802441dd0af803015381f85c8dc23ffd2cc",
+    "logs/hardware/freeze-fixed-runtime/slime.log": "18d07a060357f827e3492d5e9ae98994dd411df2c58bbf36853895d243b4704d",
+    "logs/hardware/freeze-fixed-runtime/slime-error.log": "2dd943be50a4de979b55eb34cbf61ee645f086da0fd4c414b7d3950f1d9de81e"
+  }
+}

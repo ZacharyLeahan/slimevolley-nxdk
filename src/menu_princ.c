@@ -50,13 +50,13 @@ char* m_vitesse_aide(void) {
 			return _("The default speed.");
 		break;
 		case 1:
-			return _("In the turbo mode, everything goes twice as highter\n and twice as faster.");
+			return _("Faster movement and stronger jumps.");
 		break;
 		case 2:
-			return _("In the sprint mode, everything goes faster and highter\n for each bounce.");
+			return _("Movement, jumps and ball speed increase with each bounce.");
 		break;
 		case 3:
-			return _("In the fury mode, the speed is increased for each bounce.");
+			return _("The game speeds up with each bounce.");
 		break;
 		default:
 			return "";
@@ -90,11 +90,19 @@ void menu_princ(void) {
 #endif
 		{ &m_vitesse_aff, NULL,				&m_vitesse_aide, NULL,									&m_vitesse_act,	true,		true },
 		{ &m_balles_aff, NULL,				NULL, N_("Choose the number of balls."),				&m_balles_act,	true,		true },
+#ifdef SV_XBOX
+		{ NULL, "Options...", NULL, "Adjust sound, score display and theme. View controller help.", &menu_options, false, true },
+#else
 		{ NULL, N_("Options…"),				NULL, N_("Configure sound, keys, screen and theme."),	&menu_options,	false,		true },
+#endif
 		{ NULL, N_("Credits"),				NULL, N_("Who made this game?"),						&aff_credits,	false,		true },
 	};
 
+#ifdef SV_XBOX
+	affiche_menu_systeme(princ_menu, MAX_OPTS);
+#else
 	affiche_menu(princ_menu, MAX_OPTS, N_("Quit"));
+#endif
 
 	return;
 }

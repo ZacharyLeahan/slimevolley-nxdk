@@ -41,6 +41,10 @@ typedef struct menu_elem {
 
 void affiche_menu(menu_elem* fonctions, Uint8 n, char* nom_retour);
 
+#ifdef SV_XBOX
+void affiche_menu_systeme(menu_elem* fonctions, Uint8 n);
+#endif
+
 int decalage; /* Pour aligner les slimes par rapport au texte */
 
 Sint8 menu_act; /* L'élément de menu actuellement choisi */

@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-19",
+  "recorded_utc": "2026-10-19T17:38:13.781602+00:00",
+  "xbe_sha256": "a5d0010cbfdf9fc4d29012cb1a9b585249d02d2f5c39bcfa955837313e86e1c4",
+  "hardware": "Connected original Xbox; MM_STATISTICS reports 128 MiB total physical RAM. Physical retail-64-MB acceptance not established.",
+  "controller": "One KVM XID controller, game slot/physical-port index 1 according to game log.",
+  "result": "First functional hardware play test passed; performance below intended target.",
+  "checks": {
+    "menu_navigation": "Observed main/team menu transitions after KVM USB mounted again.",
+    "four_slots": "Two local assignments per side loaded and rendered, A/C versus B/D. This does not establish four simultaneous human inputs.",
+    "dpad_movement": "Human slime visibly moved right.",
+    "stick_movement": "ls-right and ls-left visibly changed human position.",
+    "jump": "A produced an airborne human slime.",
+    "skin_change": "X changed human slime to white.",
+    "pause_resume": "Start displayed Paused; subsequent Start restored gameplay.",
+    "2v2_ai": "One human plus three level-0 AI; rallies, collisions and scoring observed.",
+    "complete_match": "Separate 1v1 reached 0-10 winner/results screen. Human was deliberately parked away from the ball to exercise repeated scoring and end-of-match handling.",
+    "results_return": "A dismissed results back to main menu.",
+    "normal_exit": "B from main menu returned to XBMC; audio closed and SDL shutdown complete in retrieved log.",
+    "audio_capture": {
+      "seconds": 12.0,
+      "complete": true,
+      "channels": [
+        {
+          "peak": 19220,
+          "rms": 2162.7900938656217,
+          "full_scale_samples": 0,
+          "active_samples_over_32": 96980
+        },
+        {
+          "peak": 19220,
+          "rms": 2162.7753498900465,
+          "full_scale_samples": 0,
+          "active_samples_over_32": 96996
+        }
+      ],
+      "capture_overruns_after": 0,
+      "wav_sha256": "8e385f867e7ac6453ecdf07ac77ab6e8087595b3ee59400e70966d004304300f",
+      "human_listening": false
+    },
+    "executable_readback": "Installed XBE retrieved after gameplay; SHA256 matches local candidate.",
+    "warm_relaunch": "XBMC launch reverified installed package; fresh stream captured main menu again. Console left ready at the main menu."
+  },
+  "performance": {
+    "four_slot_samples_with_fps_at_least_10": 36,
+    "min_fps": 25.1,
+    "median_fps": 31.7,
+    "max_fps": 31.8,
+    "min_available_kib": 52572,
+    "caveat": "Uncontrolled five-second presentation samples; includes pauses/transitions, not a controlled benchmark. Target 50 FPS not met."
+  },
+  "limits": [
+    "Four simultaneous human controllers and every port/reconnect permutation untested.",
+    "Physical stock-64-MB console and constrained allocation budget unverified.",
+    "Cold-start repetition, all themes/speeds/multiball combinations, long soak and settings-reload acceptance remain open.",
+    "Captured audio has not had human listening review.",
+    "No game-side audio underrun instrumentation; capture counters are not game underrun counters."
+  ],
+  "raw_evidence_directory": "/Users/zach/Developer/github.com/ZacharyLeahan/slimevolley-nxdk/logs/hardware",
+  "evidence_sha256": {
+    "logs/hardware/play-final-1v1-finish-check.jpg": "fc0fec2d764d77056a6a54be3aca0d2f9f2a32ff4ab3de73efb22c8e2167fd11",
+    "logs/hardware/play-final-1v1-progress.jpg": "ead6d829d0d3bbb0fd65cee360b3f38b9e0ac0b93da16111cc3e6261fb6cc65a",
+    "logs/hardware/play-final-1v1-setup.jpg": "b7ec1a33f8c0c76f2955574985dce1f73df2ae586b9e0b91b833a5e7396c0218",
+    "logs/hardware/play-final-2v2-before.jpg": "414c18d99f17a818f6a6e654480b402bee1c51431731da3773010061222fc166",
+    "logs/hardware/play-final-2v2-jumping.jpg": "9b06b69f7f96d1bf662888ced44ced276f0f4f6fe308b6853794e7be3ac04c1f",
+    "logs/hardware/play-final-2v2-setup.jpg": "499639abf85dbcfe93168f101543ad6db772501073272bb54b0312267583ba27",
+    "logs/hardware/play-final-cpu-match-start.jpg": "d90d073c2f70ffb65cbb8d93f15e9f814f93fdc8c6b87966dcdb0b0593f05ca7",
+    "logs/hardware/play-final-cpu-setup.jpg": "a8e8a7ef0a0eb953cc832b0536da13254c9391f12de9917a4684a0034bb899aa",
+    "logs/hardware/play-final-dashboard.jpg": "dbbdfa0185eb522cba5fd000f4adf39ec1a8d5a7e001ff7328b4a133c07bbe9b",
+    "logs/hardware/play-final-jump.jpg": "55b9c824c6ca7cb19cbebdeb26659b3e5bc6b54e2b325b8c6bf5ea1e5fcd5ddb",
+    "logs/hardware/play-final-match-progress-1.jpg": "9e7415b7d3f8d179a27c9db469c6ca7c1fc55f8c89f154c6fc8529c95cbcb80a",
+    "logs/hardware/play-final-match-progress-2.jpg": "8fdc7e9a9638aed0dac3c5739e83f3d2556dd860b1e4a6da65161a1a516c0b0f",
+    "logs/hardware/play-final-move-right.jpg": "cec01c3dfa2a36cb906773a5f68324141efee1c111c9756cd0beaf713c69d507",
+    "logs/hardware/play-final-paused-confirmed.jpg": "c9a27358f76250c7b923c4df80b0aefa9c48bc4978d02f016d6f7741916ccaf4",
+    "logs/hardware/play-final-paused.jpg": "742f1ae9b78c2b5d9a85d8d79fe833f2d7feaf0aea09b443f880cfb5fdcfc080",
+    "logs/hardware/play-final-rally.jpg": "d3182de6711cd3d284109cbd3dc95e6c58204132312fd2ae4f31d8a3a4d996e0",
+    "logs/hardware/play-final-results.jpg": "78c1617a30270ed88e3cc9bacd7e52abe55a7bd96ec2e5deed39ef0fce86a1b9",
+    "logs/hardware/play-final-resumed.jpg": "bc75995d21b6088db48d441a9e29577c6eae8618a469824d3ae515d0ac7e4525",
+    "logs/hardware/play-final-returned-main.jpg": "ec4598bb3e0baf89236f59fdac3688a821b4c0a95b7f1d6a02055e8dd8b79f95",
+    "logs/hardware/play-final-stick-left.jpg": "849fa3ac38ce8f99c04d0ecf9ff8acf4b43f1733ae8d94280eec5470b3849712",
+    "logs/hardware/play-final-stick-right.jpg": "9125746abab87b1002249c8b7d4c244796b1771c3d646c6bedb5e8d6a81376d9",
+    "logs/hardware/play-final-team-return.jpg": "d8bd8ed1bfcd63cd9c63dd4044069b88a0562007de4e0277e29b268ea13d0f7c",
+    "logs/hardware/play-final-team.jpg": "fdf1335f5c108202dd924fa42efea8cc2d220e6dbd6d8f74a9d5abb2963fdbf1",
+    "logs/hardware/play-final-runtime/slime.log": "a70184335aedc512184ef9febc4c4192088eda663cdb3d6634dc3e498ec44a0e",
+    "logs/hardware/play-final-runtime/slime-error.log": "2dd943be50a4de979b55eb34cbf61ee645f086da0fd4c414b7d3950f1d9de81e",
+    "logs/hardware/play-final-runtime/default.xbe": "a5d0010cbfdf9fc4d29012cb1a9b585249d02d2f5c39bcfa955837313e86e1c4",
+    "logs/hardware/play-final-audio/capture.json": "c39cc5c0079edf4b16a149b5fac0ce2f8ac4b35e51e3c9f3e964b76f5d7ea559",
+    "logs/hardware/play-final-audio/capture.wav": "8e385f867e7ac6453ecdf07ac77ab6e8087595b3ee59400e70966d004304300f",
+    "logs/hardware/play-final-warm-menu.jpg": "ec4598bb3e0baf89236f59fdac3688a821b4c0a95b7f1d6a02055e8dd8b79f95"
+  }
+}

@@ -26,6 +26,7 @@ $Id: themes_general.c 251 2008-11-11 20:26:43Z vinduv $
 #include "jeu.h"
 #include "themes.h"
 #include "echelle.h"
+#include "audio.h"
 
 #define RATIO_2J .8
 #define RATIO_3J .6
@@ -147,6 +148,7 @@ void _libere_th_act(void) {
 }
 
 void theme_suivant(void) {
+	stop_son();
 	_libere_th_act();
 	_theme_suivant(false);
 	th_libere = false;

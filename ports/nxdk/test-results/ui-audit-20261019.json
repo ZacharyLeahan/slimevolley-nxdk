@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-19",
+  "xbe_sha256": "e05302d766a914088ef041a38cfe6e56f44ba34de0ca9d33bb9ddd1b124d486a",
+  "deployment": "logs/hardware/ui-audit-install/deploy.json",
+  "changes": [
+    "Xbox player labels use Controller 1-4 instead of keyboard key sets",
+    "Player and Options help describes controller ports and buttons",
+    "Controls help clarifies D-pad actions, pause, return and dashboard recovery",
+    "Desktop fullscreen toggle removed from Xbox Options",
+    "Main menu exit labelled Dashboard",
+    "Speed and theme descriptions corrected",
+    "Xbox mandatory players can cycle through all four AI levels; cycling back to AI restarts at level 0"
+  ],
+  "validation": {
+    "host": "Desktop and Xbox player-count ASan/UBSan variants passed, including Xbox controller/AI cycle regression cases",
+    "desktop_ui_syntax": "Passed against the host SDL2 headers with explicit SDL 1.2 video declarations; not a desktop runtime test",
+    "build": "NXDK build passed",
+    "hardware": "Inspected main menu, Options description/list, all controls-help lines, controller/player help, disabled teammate help, AI level 1 and 3. Verified B returns from help; restored left Controller 1. No clipping observed in inspected screens. All 76 package files verified on Xbox by FTP readback.",
+    "scope": "Default Modern theme and current 640x480 output only; no new extended gameplay soak or multiple physical controllers."
+  },
+  "screenshots_sha256": {
+    "logs/hardware/ui-audit-ai-level1.jpg": "204f511334d82f066e853a3a93514204ee7015ac1330c840525e277e4e35c80f",
+    "logs/hardware/ui-audit-ai-level3.jpg": "318383d2d8acefe54ba0c93c9301fc158c00e0ead35b8b5e1b1aeeee473d4f4f",
+    "logs/hardware/ui-audit-controls.jpg": "1246e858ffab9a48bcbd2769ab65e93401dcebc54908525348dfe1077bebc328",
+    "logs/hardware/ui-audit-disabled-help.jpg": "2f43569d8cf29418f464f91cf3ece0f16930da6a5fb77dfd0d3b511f7796232d",
+    "logs/hardware/ui-audit-main.jpg": "6c4b0c606edb163f21bdb8f413b551cf2550ea6a72f8c84457d9c9d0d854528b",
+    "logs/hardware/ui-audit-options-help.jpg": "6b25ab0b64c1546c02345abf95aff6340ce0cefb0600adff03af263d8ca979bf",
+    "logs/hardware/ui-audit-options.jpg": "c685f40350e8dcee470d7238ce67ef528672a874ae0d9930250a6a2fe129d997",
+    "logs/hardware/ui-audit-player-help.jpg": "65dca7ba610819c446cdd2b0bee807f79bc9f7f1c69dc91991ad745003cbc663",
+    "logs/hardware/ui-audit-ready-menu.jpg": "6c4b0c606edb163f21bdb8f413b551cf2550ea6a72f8c84457d9c9d0d854528b"
+  }
+}

@@ -29,7 +29,11 @@ $Id: menu_options.c 241 2008-11-04 21:40:04Z vinduv $
 char tmp_chaine[64];
 
 void m_touches_act(void) {
+#ifdef SV_XBOX
+	sv_controls_help();
+#else
 	configClavier();
+#endif
 }
 
 char* m_ecran_aff(void) {
@@ -101,22 +105,23 @@ void m_theme_act(void) {
 void menu_options(void) {
 	menu_elem options_menu[] = {
 		/* Texte				Aide									Action			rec. G/D 	Cont. */
-		{ NULL, N_("Set keys"),	NULL, N_("Define game key controls."),	&m_touches_act,	true,		true },
+#ifdef SV_XBOX
+		{ NULL, "Controls", NULL, "View Xbox controller buttons and player ports.", &m_touches_act, false, true },
+#else
+		{ NULL, N_("Controls"),	NULL, N_("Define game key controls."),	&m_touches_act,	true,		true },
 		{ &m_ecran_aff, NULL,	NULL, NULL,								&m_ecran_act,	false,		true },
+#endif
 		{ &m_sons_aff, NULL,	NULL, NULL,								&m_sons_act,	false,		true },
 		{ &m_score_aff, NULL,	NULL, INFO_SCORE,						&m_score_act,	false,		true },
 		{ &m_fps_aff, NULL,		NULL, NULL,								&m_fps_act,		false,		true },
 
-#ifdef SV_PORTABLE
-#define MAX_OPTS 5
-#else
-#define MAX_OPTS 6
-		{ &m_theme_aff, NULL,	NULL, N_("The theme change the menu and game look."),								&m_theme_act,	false,		true },
+#ifndef SV_PORTABLE
+		{ &m_theme_aff, NULL,	NULL, N_("Change the menu and game appearance."),								&m_theme_act,	false,		true },
 #endif
 	};
 
 	prep_anim(CGSFlip, CGSLeft);
-	affiche_menu(options_menu, MAX_OPTS, "Return");
+	affiche_menu(options_menu, sizeof(options_menu) / sizeof(options_menu[0]), "Return");
 	prep_anim(CGSFlip, CGSRight);
 
 	return;

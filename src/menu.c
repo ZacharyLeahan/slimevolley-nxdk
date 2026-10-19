@@ -31,7 +31,7 @@ $Id: menu.c 242 2008-11-08 13:40:13Z vinduv $
 
 #define TEXTE_GAUCHE 170
 
-void affiche_menu(menu_elem* fonctions, Uint8 n, char* nom_retour) {
+static void menu_interne(menu_elem* fonctions, Uint8 n, char* nom_retour, void (*sortie)(void)) {
 	Uint8 i;
 
 	bool cont = true;
@@ -103,7 +103,7 @@ void affiche_menu(menu_elem* fonctions, Uint8 n, char* nom_retour) {
 						switch(evenement.key.keysym.sym) {
 							case SDLK_ESCAPE:
 								maj_requise = true;
-								cont = false;
+								if(sortie) sortie(); else cont = false;
 							break;
 
 							case SDLK_UP:
@@ -129,7 +129,7 @@ void affiche_menu(menu_elem* fonctions, Uint8 n, char* nom_retour) {
 								maj_requise = true;
 								joue_son(SON_RBD_SLIME);
 								if(menu_act == n) {
-									cont = false;
+									if(sortie) sortie(); else cont = false;
 								} else {
 									action = 0;
 									cont = fonctions[menu_act].cont_menu;
@@ -167,3 +167,12 @@ void affiche_menu(menu_elem* fonctions, Uint8 n, char* nom_retour) {
 
 	return;
 }
+
+void affiche_menu(menu_elem* fonctions, Uint8 n, char* nom_retour) {
+    menu_interne(fonctions,n,nom_retour,NULL);
+}
+#ifdef SV_XBOX
+void affiche_menu_systeme(menu_elem* fonctions, Uint8 n) {
+    menu_interne(fonctions,n,"Exit / System...",sv_system_menu);
+}
+#endif
