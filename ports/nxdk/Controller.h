@@ -22,6 +22,36 @@ static inline unsigned sv_pad_mask(const SvPadState *p) {
     if((b&(SV_UP|SV_DOWN))==(SV_UP|SV_DOWN)) b&=~(SV_UP|SV_DOWN);
     return b;
 }
+/* Remember each source separately so a new press counts even when another
+ * control already holds the same direction. Exact simultaneous opposites
+ * preserve the previous winner, or remain neutral without one. */
+typedef struct { unsigned sources[4]; unsigned horizontal, vertical; } SvPadHistory;
+static inline unsigned sv_pad_resolve(const SvPadState *p, SvPadHistory *h) {
+    unsigned sources[4]={0}, fresh[4], b=sv_pad_mask(p);
+    const unsigned hats[4]={SDL_HAT_UP,SDL_HAT_DOWN,SDL_HAT_LEFT,SDL_HAT_RIGHT};
+    for(int d=0;d<4;d++) {
+        if(p->hat&hats[d]) sources[d]|=1;
+        int axis=d<2?1:0;
+        for(int stick=0;stick<2;stick++) {
+            Sint16 value=p->axes[axis+stick*3];
+            if((d==0||d==2)?value<-12000:value>12000) sources[d]|=2u<<stick;
+        }
+    }
+    if(p->axes[2]>0) sources[2]|=8;
+    if(p->axes[5]>0) sources[3]|=8;
+    for(int d=0;d<4;d++) {fresh[d]=sources[d]&~h->sources[d];h->sources[d]=sources[d];}
+    b&=~(SV_UP|SV_DOWN|SV_LEFT|SV_RIGHT);
+    for(int pair=0;pair<2;pair++) {
+        int a=pair*2,c=a+1;
+        unsigned *winner=pair?&h->horizontal:&h->vertical;
+        if(!sources[a]&&!sources[c]) *winner=0;
+        else if(!sources[c]) *winner=1u<<a;
+        else if(!sources[a]) *winner=1u<<c;
+        else if(!!fresh[a]!=!!fresh[c]) *winner=fresh[a]?1u<<a:1u<<c;
+        b|=*winner;
+    }
+    return b;
+}
 static inline int sv_pad_recovery(const SvPadState *p) {
     return (p->buttons&((1u<<6)|(1u<<7)))==((1u<<6)|(1u<<7));
 }

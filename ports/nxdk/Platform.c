@@ -127,6 +127,7 @@ static void controllers(void) {
         if(slot<0||slot>=4||pads[slot]) {SDL_JoystickClose(pad);continue;}
         pads[slot]=pad;printf("pad connected slot=%d instance=%ld\n",slot+1,(long)id);fflush(stdout);
     }
+    static SvPadHistory history[4];
     static const SDL_Keycode codes[8]={SDLK_UP,SDLK_DOWN,SDLK_LEFT,SDLK_RIGHT,SDLK_RETURN,SDLK_ESCAPE,SDLK_SPACE,SDLK_x};
     for(int i=0;i<4;i++) {
         unsigned b=0; SDL_Joystick *p=pads[i];
@@ -136,8 +137,9 @@ static void controllers(void) {
             for(int axis=0;axis<6;axis++) state.axes[axis]=SDL_JoystickGetAxis(p,axis);
             for(int button=0;button<10;button++)
                 if(SDL_JoystickGetButton(p,button)) state.buttons|=1u<<button;
-            b=sv_pad_mask(&state);
+            b=sv_pad_resolve(&state,&history[i]);
         }
+        if(!p) memset(&history[i],0,sizeof(history[i]));
         held[i]=b;
         if(sv_pad_recovery(&state)) {
             if(!reset_since[i]) reset_since[i]=SDL_GetTicks();
