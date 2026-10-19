@@ -5,13 +5,14 @@ mkdir -p "$root/.local/tests"
 export SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy
 if [ "$(uname -s)" = Darwin ]; then
     export PATH="/opt/homebrew/opt/llvm/bin:/opt/homebrew/bin:$PATH"
+    export DYLD_LIBRARY_PATH="$(pkg-config --variable=libdir sdl2)${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
     linker=(-Wl,-dead_strip -Wl,-undefined,dynamic_lookup)
 else
     linker=(-Wl,--gc-sections)
 fi
 cc=${HOST_CC:-clang}
 read -r -a sdl_cflags <<< "$(pkg-config --cflags sdl2)"
-read -r -a sdl_libs <<< "$(pkg-config --libs sdl2)"
+read -r -a sdl_libs <<< "$(pkg-config --libs-only-L sdl2) -lSDL2"
 for variant in desktop xbox; do
     flags=(-DSV_HOST_TEST=1)
     if [ "$variant" = xbox ]; then flags=(-DSV_XBOX=1); fi
