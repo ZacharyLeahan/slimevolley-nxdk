@@ -4,6 +4,22 @@ Slime Volley for the original Xbox, built with [nxdk](https://github.com/XboxDev
 This playable test port keeps the original game and surface renderer, with Xbox
 controller input, console-specific menus, and up to four player slots.
 
+## Download and install on Xbox
+
+1. Open [Releases](https://github.com/ZacharyLeahan/slimevolley-nxdk/releases) and
+   choose the newest **alpha pre-release**. These are testing builds, not a stable 1.0 release.
+2. Download **`slimevolley-nxdk-test.zip`** and extract it on your computer.
+3. Copy the **entire extracted folder's contents** into a game folder under your
+   Xbox dashboard's homebrew directory, for example `F:\Homebrew\SlimeVolley\`.
+   Use the drive and homebrew folder configured on your modded original Xbox.
+4. Launch **`default.xbe`** from that folder using your dashboard. If needed, add
+   the folder to the dashboard's homebrew/game scan paths.
+
+Keep `default.xbe`, `data/`, and the other package files together. The XBE needs
+those assets to run; copying only the executable is not enough. The source ZIP
+and GitHub's automatic source-code downloads are for developers, not installation.
+Read the selected release's notes for its tested hardware and known limitations.
+
 ## Gameplay
 
 ![Slime Volley gameplay on an original Xbox](docs/screenshots/xbox-gameplay.jpg)
@@ -23,18 +39,24 @@ Both images are unedited hardware captures; [capture details](docs/screenshots/R
 
 | Action | Xbox controller |
 | --- | --- |
-| Move | D-pad, either analog stick, or left/right trigger |
+| Move left / right | D-pad, either analog stick, LT / RT |
 | Jump | A or Up on the D-pad / either stick |
 | Change skin | X or Down on the D-pad / either stick |
 | Select / go back | A / B or Back |
 | Pause / resume | Start |
 | Open Exit / System from the main menu | B or Back |
 
+Opposing directions use **last pressed wins** across the D-pad, both sticks and
+triggers. Hold RT to move right, then press LT to switch left immediately;
+release LT while still holding RT to move right again. Controls held in the
+same direction combine. Opposite inputs first detected together keep the previous
+winning direction, or stay neutral if neither was already active.
+
 **Exit / System** offers Return to launcher, Restart game, Reboot Xbox, and
 Power off Xbox. The menu and each action confirmation start on **Cancel**.
-The current private build targets this console's launcher at
+Return to launcher currently targets
 `E:\Dashboard\default.xbe`; see the [port documentation](ports/nxdk/README.md)
-for setup details and the recovery shortcut.
+for dashboard compatibility details and the Back + Start recovery shortcut.
 
 ## Agent testing on real hardware
 
@@ -63,7 +85,7 @@ ports/nxdk/tools/build.sh
 python3 ports/nxdk/tools/package.py
 ```
 
-The Xbox executable is written to `ports/nxdk/bin/default.xbe`, and the private
+The Xbox executable is written to `ports/nxdk/bin/default.xbe`, and the alpha
 test package to `artifacts/slimevolley-nxdk-test.zip`. The SDK revision and local
 patches are pinned; see [build and deployment instructions](ports/nxdk/README.md).
 
@@ -94,8 +116,9 @@ Game code is GPL-3.0-or-later. Artwork, sounds, fonts, and packaging have their
 own notices. Preserve these when modifying or distributing the game; see
 [the detailed copyright and license notices](debian/copyright).
 
-### Testing builds and releases
+## Testing builds and releases
 
 GitHub Actions builds downloadable Xbox testing packages containing `default.xbe`,
-required assets, licenses and build metadata. Releases remain alpha pre-releases
-until testing establishes readiness. See [build downloads and release steps](ports/nxdk/RELEASING.md).
+required assets, licenses and build metadata. Published downloads are on the
+[Releases page](https://github.com/ZacharyLeahan/slimevolley-nxdk/releases).
+Releases remain alpha pre-releases until testing establishes readiness. See [build downloads and release steps](ports/nxdk/RELEASING.md).
