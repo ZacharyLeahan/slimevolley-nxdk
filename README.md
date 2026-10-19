@@ -23,9 +23,9 @@ Both images are unedited hardware captures; [capture details](docs/screenshots/R
 
 | Action | Xbox controller |
 | --- | --- |
-| Move | D-pad or left stick |
-| Jump | A or D-pad Up |
-| Change skin | X or D-pad Down |
+| Move | D-pad, either analog stick, or left/right trigger |
+| Jump | A or Up on the D-pad / either stick |
+| Change skin | X or Down on the D-pad / either stick |
 | Select / go back | A / B or Back |
 | Pause / resume | Start |
 | Open Exit / System from the main menu | B or Back |
